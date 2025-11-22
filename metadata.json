@@ -1,0 +1,7 @@
+{
+  "name": "Amazonia Clone",
+  "description": "A fully functional e-commerce clone with customer and seller dashboards, review systems (text/photo/video), and AI-powered product assistance.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
