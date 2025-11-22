@@ -45,7 +45,7 @@ const Checkout: React.FC = () => {
             <div className="space-y-3 max-w-md">
               <div className="space-y-1">
                 <label className="text-sm font-bold">Full name</label>
-                <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-orange-500 outline-none" value={address.fullName} onChange={e => setAddress({...address, fullName: e.target.value})} />
+                <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-violet-500 outline-none" value={address.fullName} onChange={e => setAddress({...address, fullName: e.target.value})} />
               </div>
               <div className="space-y-1">
                 <label className="text-sm font-bold">Address</label>
@@ -73,7 +73,7 @@ const Checkout: React.FC = () => {
             <h2 className="text-lg font-bold text-amazonia-orange mb-4">2 Payment method</h2>
             <div className="border rounded-md p-4 bg-gray-50">
                <div className="flex items-center gap-2 mb-2">
-                  <input type="radio" checked readOnly className="text-orange-600" />
+                  <input type="radio" checked readOnly className="text-violet-600" />
                   <span className="font-bold">Credit or Debit Card</span>
                </div>
                <div className="ml-6 space-y-2 max-w-xs">
@@ -111,7 +111,7 @@ const Checkout: React.FC = () => {
              <button 
                 onClick={handlePlaceOrder}
                 disabled={loading}
-                className="w-full bg-amazonia-yellow hover:bg-amazonia-orange rounded-md py-2 text-sm shadow-sm mb-4 disabled:opacity-50"
+                className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white rounded-md py-2 text-sm shadow-sm mb-4 disabled:opacity-50 transition-colors"
              >
                {loading ? 'Processing...' : 'Place your order'}
              </button>

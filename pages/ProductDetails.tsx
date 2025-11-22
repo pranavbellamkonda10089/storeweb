@@ -76,7 +76,7 @@ const ProductDetails: React.FC = () => {
         <div className="md:col-span-5 lg:col-span-4">
            <h1 className="text-2xl font-medium text-gray-900">{product.title}</h1>
            <div className="flex items-center gap-2 mt-1">
-              <div className="flex text-amazonia-orange">
+              <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
               </div>
               <span className="text-amazonia-blue text-sm hover:underline">{product.reviewCount} ratings</span>
@@ -131,11 +131,11 @@ const ProductDetails: React.FC = () => {
              
              <button 
                onClick={() => addToCart(product, 1)}
-               className="w-full bg-amazonia-yellow hover:bg-amazonia-orange rounded-full py-2 text-sm mb-2 shadow-sm transition-colors"
+               className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white rounded-full py-2 text-sm mb-2 shadow-sm transition-colors"
              >
                Add to Cart
              </button>
-             <button className="w-full bg-amazonia-orange hover:bg-orange-500 rounded-full py-2 text-sm mb-4 shadow-sm transition-colors">
+             <button className="w-full bg-amazonia-orange hover:bg-indigo-700 text-white rounded-full py-2 text-sm mb-4 shadow-sm transition-colors">
                Buy Now
              </button>
              
@@ -156,7 +156,7 @@ const ProductDetails: React.FC = () => {
              <div className="flex items-center gap-2 mb-4">
                <span className="text-4xl font-bold">{product.rating}</span>
                <div className="flex flex-col">
-                 <div className="flex text-amazonia-orange">
+                 <div className="flex text-yellow-400">
                     {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
                  </div>
                  <span className="text-sm text-gray-500">{product.reviewCount} global ratings</span>
@@ -193,14 +193,14 @@ const ProductDetails: React.FC = () => {
                    <span className="text-sm font-medium">{review.userName}</span>
                  </div>
                  <div className="flex items-center gap-2 mb-2">
-                   <div className="flex text-amazonia-orange">
+                   <div className="flex text-yellow-400">
                       {[...Array(5)].map((_, i) => <Star key={i} size={14} fill={i < review.rating ? "currentColor" : "none"} className={i >= review.rating ? "text-gray-300" : ""} />)}
                    </div>
                    <span className="font-bold text-sm">{review.title}</span>
                  </div>
                  <div className="text-xs text-gray-500 mb-2">Reviewed on {review.date}</div>
                  {review.verifiedPurchase && (
-                   <div className="text-xs text-orange-700 font-bold mb-2">Verified Purchase</div>
+                   <div className="text-xs text-indigo-700 font-bold mb-2">Verified Purchase</div>
                  )}
                  <p className="text-sm text-gray-800 mb-3">{review.text}</p>
                  

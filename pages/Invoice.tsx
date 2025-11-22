@@ -59,7 +59,7 @@ const Invoice: React.FC = () => {
             </button>
             <button 
               onClick={handleDownload}
-              className="flex items-center gap-2 bg-amazonia-yellow hover:bg-amazonia-orange px-4 py-2 rounded shadow-sm font-medium text-sm transition-colors"
+              className="flex items-center gap-2 bg-amazonia-yellow hover:bg-amazonia-orange px-4 py-2 rounded shadow-sm font-medium text-sm transition-colors text-white"
             >
               <Download size={16} /> Download PDF
             </button>

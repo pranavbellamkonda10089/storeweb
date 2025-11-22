@@ -73,7 +73,7 @@ const OrderTracking: React.FC = () => {
                         <div>
                            <div className="font-bold text-amazonia-blue hover:underline text-sm">{item.title}</div>
                            <div className="text-xs text-gray-500">Return window closed on Nov 20, 2023</div>
-                           <button className="mt-2 bg-amazonia-yellow hover:bg-amazonia-orange px-3 py-1 rounded-md text-xs shadow-sm">Buy it again</button>
+                           <button className="mt-2 bg-amazonia-yellow hover:bg-amazonia-orange text-white px-3 py-1 rounded-md text-xs shadow-sm transition-colors">Buy it again</button>
                         </div>
                      </div>
                    ))}

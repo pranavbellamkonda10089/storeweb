@@ -88,7 +88,7 @@ const Cart: React.FC = () => {
            </div>
            <button 
              onClick={handleCheckout}
-             className="w-full bg-amazonia-yellow hover:bg-amazonia-orange rounded-md py-2 shadow-sm text-sm"
+             className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white rounded-md py-2 shadow-sm text-sm transition-colors"
            >
              Proceed to checkout
            </button>

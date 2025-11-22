@@ -15,11 +15,11 @@ const ProductCard: React.FC<Props> = ({ product }) => {
       </Link>
       
       <div className="flex flex-col gap-1">
-        <Link to={`/product/${product.id}`} className="hover:text-amazonia-orange hover:underline line-clamp-2 text-sm font-medium">
+        <Link to={`/product/${product.id}`} className="hover:text-amazonia-blue hover:underline line-clamp-2 text-sm font-medium">
           {product.title}
         </Link>
         
-        <div className="flex items-center gap-1 text-sm text-amazonia-orange">
+        <div className="flex items-center gap-1 text-sm text-yellow-400">
            <div className="flex">
              {[...Array(5)].map((_, i) => (
                <Star key={i} size={14} fill={i < Math.floor(product.rating) ? "currentColor" : "none"} strokeWidth={i < Math.floor(product.rating) ? 0 : 2} className={i < Math.floor(product.rating) ? "" : "text-gray-300"} />

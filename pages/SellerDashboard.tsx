@@ -117,7 +117,7 @@ const SellerDashboard: React.FC = () => {
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                   <div className="text-gray-500 text-sm font-medium">Pending Shipments</div>
-                  <div className="text-3xl font-bold text-orange-600 mt-1">{orders.filter(o => o.status === OrderStatus.PENDING).length}</div>
+                  <div className="text-3xl font-bold text-violet-600 mt-1">{orders.filter(o => o.status === OrderStatus.PENDING).length}</div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                   <div className="text-gray-500 text-sm font-medium">Total Revenue</div>
@@ -269,7 +269,7 @@ const SellerDashboard: React.FC = () => {
                 </div>
 
                 <div className="pt-4 border-t">
-                  <button type="submit" className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-gray-900 font-medium py-2 rounded-md shadow-sm transition-colors">
+                  <button type="submit" className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white font-medium py-2 rounded-md shadow-sm transition-colors">
                     Save and List Product
                   </button>
                 </div>
@@ -409,7 +409,7 @@ const SellerDashboard: React.FC = () => {
                </div>
 
                <div className="flex justify-end">
-                 <button type="submit" className="bg-amazonia-yellow hover:bg-amazonia-orange text-gray-900 font-bold py-2 px-8 rounded shadow-sm">
+                 <button type="submit" className="bg-amazonia-yellow hover:bg-amazonia-orange text-white font-bold py-2 px-8 rounded shadow-sm">
                    Save Profile & Documents
                  </button>
                </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
-import { ArrowLeft, ShieldAlert, Store } from 'lucide-react';
+import { ArrowLeft, ShieldAlert, Store, Eye, EyeOff } from 'lucide-react';
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,10 +10,37 @@ const Auth: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   
   const { login, register, registeredUsers } = useStore();
   const navigate = useNavigate();
+
+  const handleBack = () => {
+    // Priority 1: If in registration mode, go back to login
+    if (!isLogin) {
+      setIsLogin(true);
+      setError('');
+      return;
+    }
+    
+    // Priority 2: If in Admin mode, go back to normal login
+    if (isAdminMode) {
+      setIsAdminMode(false);
+      setError('');
+      return;
+    }
+
+    // Priority 3: If in Seller mode, go back to normal login
+    if (isSellerMode) {
+      setIsSellerMode(false);
+      setError('');
+      return;
+    }
+
+    // Priority 4: If in normal login, go to home
+    navigate('/');
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,6 +93,7 @@ const Auth: React.FC = () => {
     setError('');
     setEmail('');
     setPassword('');
+    setShowPassword(false);
   };
 
   const toggleSellerMode = () => {
@@ -73,14 +101,18 @@ const Auth: React.FC = () => {
     setIsAdminMode(false);
     setIsLogin(true);
     setError('');
+    setShowPassword(false);
   };
 
   return (
     <div className="min-h-screen bg-white flex flex-col items-center pt-8 relative">
-       <Link to="/" className="absolute top-6 left-6 flex items-center gap-1 text-sm text-gray-600 hover:text-amazonia-orange hover:underline">
+       <button 
+         onClick={handleBack} 
+         className="absolute top-6 left-6 flex items-center gap-1 text-sm text-gray-600 hover:text-amazonia-orange hover:underline bg-transparent border-none cursor-pointer"
+       >
           <ArrowLeft size={18} />
           Back
-       </Link>
+       </button>
 
        <div className="text-3xl font-bold tracking-tight mb-8">amazonia<span className="text-xs font-normal">.clone</span></div>
        
@@ -120,7 +152,7 @@ const Auth: React.FC = () => {
                  required 
                  value={name} 
                  onChange={e => setName(e.target.value)} 
-                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-orange-200 outline-none transition-colors" 
+                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-violet-200 outline-none transition-colors" 
                  placeholder="First and last name"
                />
              </div>
@@ -133,24 +165,33 @@ const Auth: React.FC = () => {
                required 
                value={email} 
                onChange={e => setEmail(e.target.value)} 
-               className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-orange-200 outline-none transition-colors" 
+               className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-violet-200 outline-none transition-colors" 
                placeholder={isAdminMode ? "admin@amazonia.com" : (isSellerMode ? "seller@example.com" : "")}
              />
            </div>
 
            <div className="flex flex-col gap-1">
              <label className="text-sm font-bold">Password</label>
-             <input 
-               type="password" 
-               required 
-               value={password}
-               onChange={e => setPassword(e.target.value)}
-               className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-orange-200 outline-none transition-colors" 
-               placeholder={isAdminMode ? "admin" : "At least 6 characters"}
-             />
+             <div className="relative">
+               <input 
+                 type={showPassword ? "text" : "password"} 
+                 required 
+                 value={password}
+                 onChange={e => setPassword(e.target.value)}
+                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-violet-200 outline-none transition-colors pr-10" 
+                 placeholder={isAdminMode ? "admin" : "At least 6 characters"}
+               />
+               <button
+                 type="button"
+                 onClick={() => setShowPassword(!showPassword)}
+                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+               >
+                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+               </button>
+             </div>
            </div>
 
-           <button type="submit" className={`w-full rounded py-1.5 shadow-sm text-sm border mt-2 ${isSellerMode ? 'bg-amazonia-blue text-white hover:bg-amazonia-light border-transparent' : 'bg-amazonia-yellow hover:bg-amazonia-orange border-gray-400 text-black'}`}>
+           <button type="submit" className={`w-full rounded py-1.5 shadow-sm text-sm border mt-2 ${isSellerMode ? 'bg-amazonia-blue text-white hover:bg-amazonia-light border-transparent' : 'bg-amazonia-yellow hover:bg-amazonia-orange border-transparent text-white'}`}>
              {isAdminMode ? 'Login as Admin' : (isLogin ? 'Sign in' : (isSellerMode ? 'Register as Seller' : 'Create your Amazonia account'))}
            </button>
          </form>
@@ -170,6 +211,7 @@ const Auth: React.FC = () => {
                onClick={() => {
                  setIsLogin(!isLogin);
                  setError('');
+                 setShowPassword(false);
                }}
                className="w-full mt-4 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded py-1.5 text-sm shadow-sm"
              >
