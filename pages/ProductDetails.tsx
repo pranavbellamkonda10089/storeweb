@@ -4,6 +4,7 @@ import { useStore } from '../context/StoreContext';
 import { Star, Truck, ShieldCheck, MapPin, Video, Image as ImageIcon, Send } from 'lucide-react';
 import { Review, OrderStatus } from '../types';
 import { getProductAnalysis, summarizeReviews } from '../services/geminiService';
+import ImageMagnifier from '../components/ImageMagnifier';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -62,13 +63,19 @@ const ProductDetails: React.FC = () => {
     <div className="max-w-screen-xl mx-auto p-4 bg-white mt-4">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* Images */}
-        <div className="md:col-span-4 lg:col-span-5 flex gap-4 sticky top-24 self-start">
+        <div className="md:col-span-4 lg:col-span-5 flex gap-4 sticky top-24 self-start z-30">
            <div className="flex flex-col gap-2">
-              <img src={product.image} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer" onMouseEnter={() => setActiveImage(product.image)} />
-              <img src="https://picsum.photos/id/10/400/400" className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer" onMouseEnter={() => setActiveImage("https://picsum.photos/id/10/400/400")} />
+              <img src={product.image} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(product.image)} />
+              {product.images?.map((img, idx) => (
+                <img key={idx} src={img} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(img)} />
+              ))}
+              {/* Fallback mock images if none exist */}
+              {!product.images && (
+                 <img src="https://picsum.photos/id/10/400/400" className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer" onMouseEnter={() => setActiveImage("https://picsum.photos/id/10/400/400")} />
+              )}
            </div>
-           <div className="flex-1">
-             <img src={activeImage} alt={product.title} className="w-full max-h-[500px] object-contain" />
+           <div className="flex-1 relative">
+             <ImageMagnifier src={activeImage} />
            </div>
         </div>
 
