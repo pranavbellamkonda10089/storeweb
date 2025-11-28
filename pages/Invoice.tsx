@@ -16,7 +16,7 @@ const Invoice: React.FC = () => {
     return (
       <div className="p-8 text-center">
         <h2 className="text-xl font-bold mb-4">Order not found</h2>
-        <Link to="/orders" className="text-amazonia-blue hover:underline">Back to orders</Link>
+        <Link to="/orders" className="text-storeweb-accent hover:underline">Back to orders</Link>
       </div>
     );
   }
@@ -30,7 +30,7 @@ const Invoice: React.FC = () => {
     const element = invoiceRef.current;
     const opt = {
       margin: 10,
-      filename: `Amazonia_Invoice_${order.id}.pdf`,
+      filename: `StoreWeb_Invoice_${order.id}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -47,7 +47,7 @@ const Invoice: React.FC = () => {
     <div className="bg-gray-100 min-h-screen p-8 font-sans">
       {/* Toolbar */}
       <div className="max-w-[210mm] mx-auto mb-6 flex justify-between items-center no-print">
-         <Link to="/orders" className="flex items-center gap-2 text-sm text-amazonia-blue hover:underline hover:text-orange-700">
+         <Link to="/orders" className="flex items-center gap-2 text-sm text-storeweb-accent hover:underline hover:text-storeweb-hover">
            <ArrowLeft size={16} /> Back to Orders
          </Link>
          <div className="flex gap-4">
@@ -59,7 +59,7 @@ const Invoice: React.FC = () => {
             </button>
             <button 
               onClick={handleDownload}
-              className="flex items-center gap-2 bg-amazonia-yellow hover:bg-amazonia-orange px-4 py-2 rounded shadow-sm font-medium text-sm transition-colors text-white"
+              className="flex items-center gap-2 bg-storeweb-primary hover:bg-storeweb-hover px-4 py-2 rounded shadow-sm font-medium text-sm transition-colors text-white"
             >
               <Download size={16} /> Download PDF
             </button>
@@ -71,9 +71,9 @@ const Invoice: React.FC = () => {
         {/* Header */}
         <div className="flex justify-between items-start mb-12 border-b pb-8">
            <div>
-              <div className="text-3xl font-bold tracking-tight mb-4">amazonia<span className="text-xs font-normal text-black">.clone</span></div>
+              <div className="text-3xl font-bold tracking-tight mb-4">storeweb<span className="text-xs font-normal text-black">.clone</span></div>
               <div className="text-xs text-gray-500 space-y-1">
-                <p className="font-bold text-gray-700">Amazonia Services LLC</p>
+                <p className="font-bold text-gray-700">StoreWeb Services LLC</p>
                 <p>410 Terry Ave N</p>
                 <p>Seattle, WA 98109</p>
                 <p>United States</p>
@@ -125,7 +125,7 @@ const Invoice: React.FC = () => {
                  <tr key={index} className="border-b border-gray-100">
                     <td className="py-4 px-4">
                        <div className="font-medium text-gray-900">{item.title}</div>
-                       <div className="text-xs text-gray-500 mt-1">Sold by: Amazonia Services</div>
+                       <div className="text-xs text-gray-500 mt-1">Sold by: StoreWeb Services</div>
                     </td>
                     <td className="text-center py-4 px-4">{item.quantity}</td>
                     <td className="text-right py-4 px-4">₹{item.price.toFixed(2)}</td>
@@ -165,7 +165,7 @@ const Invoice: React.FC = () => {
         <div className="text-xs text-gray-500 mt-auto pt-8 border-t border-gray-200">
            <p className="mb-2 font-medium">Payment Information</p>
            <p className="mb-6">Paid via Credit Card ending in ****</p>
-           <p className="italic">Thank you for shopping with Amazonia. This is a computer-generated invoice.</p>
+           <p className="italic">Thank you for shopping with StoreWeb. This is a computer-generated invoice.</p>
         </div>
       </div>
     </div>

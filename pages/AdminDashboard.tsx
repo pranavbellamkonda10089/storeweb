@@ -14,7 +14,7 @@ const AdminDashboard: React.FC = () => {
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
         <div className="text-xl font-bold text-red-600 mb-4">Access Denied</div>
         <p className="mb-4">You must be an administrator to view this page.</p>
-        <button onClick={() => navigate('/auth')} className="text-amazonia-blue hover:underline">Go to Login</button>
+        <button onClick={() => navigate('/auth')} className="text-storeweb-accent hover:underline">Go to Login</button>
       </div>
     );
   }
@@ -28,7 +28,7 @@ const AdminDashboard: React.FC = () => {
       <div className="max-w-screen-2xl mx-auto">
         <div className="flex items-center justify-between mb-8">
            <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-2">
-             <Shield className="text-red-600" /> Admin Dashboard
+             <Shield className="text-storeweb-accent" /> Admin Dashboard
            </h1>
            <div className="text-sm text-gray-600">
              Logged in as: <b>{user.name}</b>
@@ -37,9 +37,9 @@ const AdminDashboard: React.FC = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-           <div className="bg-white p-6 rounded-lg shadow border-t-4 border-amazonia-blue">
+           <div className="bg-white p-6 rounded-lg shadow border-t-4 border-storeweb-primary">
               <div className="flex items-center gap-4">
-                 <div className="p-3 bg-blue-100 text-amazonia-blue rounded-full"><Users size={24} /></div>
+                 <div className="p-3 bg-sky-100 text-storeweb-primary rounded-full"><Users size={24} /></div>
                  <div>
                    <div className="text-gray-500 text-sm">Total Users</div>
                    <div className="text-2xl font-bold">{registeredUsers.length}</div>
@@ -55,9 +55,9 @@ const AdminDashboard: React.FC = () => {
                  </div>
               </div>
            </div>
-           <div className="bg-white p-6 rounded-lg shadow border-t-4 border-amazonia-orange">
+           <div className="bg-white p-6 rounded-lg shadow border-t-4 border-storeweb-accent">
               <div className="flex items-center gap-4">
-                 <div className="p-3 bg-orange-100 text-amazonia-orange rounded-full"><Shield size={24} /></div>
+                 <div className="p-3 bg-rose-100 text-storeweb-accent rounded-full"><Shield size={24} /></div>
                  <div>
                    <div className="text-gray-500 text-sm">Total Revenue</div>
                    <div className="text-2xl font-bold">₹{orders.reduce((acc, o) => acc + o.total, 0).toFixed(2)}</div>
@@ -105,8 +105,8 @@ const AdminDashboard: React.FC = () => {
                           <td className="px-6 py-4 font-mono text-red-600">{u.password}</td>
                           <td className="px-6 py-4">
                              <span className={`px-2 py-1 rounded text-xs font-bold border ${
-                                u.role === 'ADMIN' ? 'bg-red-50 text-red-700 border-red-200' :
-                                u.role === 'SELLER' ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                                u.role === 'ADMIN' ? 'bg-rose-50 text-rose-700 border-rose-200' :
+                                u.role === 'SELLER' ? 'bg-sky-50 text-sky-700 border-sky-200' :
                                 'bg-green-50 text-green-700 border-green-200'
                              }`}>
                                 {u.role}

@@ -12,7 +12,7 @@ interface Message {
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: 'Hi! I\'m Amazonia\'s AI assistant. How can I help you today?' }
+    { role: 'model', text: 'Hi! I\'m StoreWeb\'s AI assistant. How can I help you today?' }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -171,14 +171,14 @@ const Chatbot: React.FC = () => {
           {/* Header - Draggable */}
           <div 
             onMouseDown={handleMouseDown}
-            className="bg-amazonia-light text-white p-4 flex justify-between items-center shadow-md cursor-move select-none"
+            className="bg-storeweb-light text-white p-4 flex justify-between items-center shadow-md cursor-move select-none"
           >
              <div className="flex items-center gap-2 pointer-events-none">
-                <div className="bg-white text-amazonia-light p-1 rounded-full">
+                <div className="bg-white text-storeweb-light p-1 rounded-full">
                    <Bot size={20} />
                 </div>
                 <div>
-                   <h3 className="font-bold text-sm">Amazonia Assistant</h3>
+                   <h3 className="font-bold text-sm">StoreWeb Assistant</h3>
                    <span className="text-xs text-green-400 flex items-center gap-1">
                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span> Online
                    </span>
@@ -194,13 +194,13 @@ const Chatbot: React.FC = () => {
              {messages.map((msg, idx) => (
                <div key={idx} className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {msg.role === 'model' && (
-                    <div className="w-8 h-8 rounded-full bg-amazonia-light text-white flex items-center justify-center shrink-0 mt-1">
+                    <div className="w-8 h-8 rounded-full bg-storeweb-light text-white flex items-center justify-center shrink-0 mt-1">
                       <Bot size={14} />
                     </div>
                   )}
                   <div className={`max-w-[80%] p-3 rounded-lg text-sm shadow-sm ${
                     msg.role === 'user' 
-                      ? 'bg-amazonia-blue text-white rounded-tr-none' 
+                      ? 'bg-storeweb-accent text-white rounded-tr-none' 
                       : 'bg-white text-gray-800 border border-gray-200 rounded-tl-none'
                   }`}>
                      {msg.text}
@@ -214,7 +214,7 @@ const Chatbot: React.FC = () => {
              ))}
              {isLoading && (
                <div className="flex gap-2 justify-start">
-                  <div className="w-8 h-8 rounded-full bg-amazonia-light text-white flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-storeweb-light text-white flex items-center justify-center shrink-0">
                       <Bot size={14} />
                   </div>
                   <div className="bg-white border border-gray-200 p-3 rounded-lg rounded-tl-none shadow-sm">
@@ -231,7 +231,7 @@ const Chatbot: React.FC = () => {
 
           {/* Input */}
           <div className="p-3 bg-white border-t border-gray-200">
-             <div className="flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2 border focus-within:border-amazonia-orange focus-within:ring-1 focus-within:ring-amazonia-orange transition-all">
+             <div className="flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2 border focus-within:border-storeweb-primary focus-within:ring-1 focus-within:ring-storeweb-primary transition-all">
                 <input 
                   type="text" 
                   value={input}
@@ -243,7 +243,7 @@ const Chatbot: React.FC = () => {
                 <button 
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
-                  className={`p-1.5 rounded-full transition-colors ${input.trim() ? 'bg-amazonia-blue text-white hover:bg-amazonia-orange' : 'text-gray-400'}`}
+                  className={`p-1.5 rounded-full transition-colors ${input.trim() ? 'bg-storeweb-accent text-white hover:bg-storeweb-primary' : 'text-gray-400'}`}
                 >
                    <Send size={16} />
                 </button>
@@ -259,7 +259,7 @@ const Chatbot: React.FC = () => {
       <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end">
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className={`${isOpen ? 'bg-gray-600' : 'bg-amazonia-yellow hover:bg-amazonia-orange'} text-amazonia-dark p-4 rounded-full shadow-lg transition-all hover:scale-110 flex items-center justify-center group`}
+          className={`${isOpen ? 'bg-gray-600' : 'bg-storeweb-primary hover:bg-storeweb-hover'} text-white p-4 rounded-full shadow-lg transition-all hover:scale-110 flex items-center justify-center group`}
         >
           {isOpen ? <X size={24} className="text-white"/> : <MessageCircle size={28} className="group-hover:rotate-12 transition-transform" />}
           {!isOpen && <span className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></span>}

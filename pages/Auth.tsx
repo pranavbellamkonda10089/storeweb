@@ -108,13 +108,13 @@ const Auth: React.FC = () => {
     <div className="min-h-screen bg-white flex flex-col items-center pt-8 relative">
        <button 
          onClick={handleBack} 
-         className="absolute top-6 left-6 flex items-center gap-1 text-sm text-gray-600 hover:text-amazonia-orange hover:underline bg-transparent border-none cursor-pointer"
+         className="absolute top-6 left-6 flex items-center gap-1 text-sm text-gray-600 hover:text-storeweb-primary hover:underline bg-transparent border-none cursor-pointer"
        >
           <ArrowLeft size={18} />
           Back
        </button>
 
-       <div className="text-3xl font-bold tracking-tight mb-8">amazonia<span className="text-xs font-normal">.clone</span></div>
+       <div className="text-3xl font-bold tracking-tight mb-8">storeweb<span className="text-xs font-normal text-sky-500">.clone</span></div>
        
        <div className="border border-gray-300 rounded p-8 w-full max-w-sm bg-white shadow-sm relative">
          {isAdminMode && (
@@ -123,7 +123,7 @@ const Auth: React.FC = () => {
             </div>
          )}
          {isSellerMode && !isAdminMode && (
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amazonia-blue text-white text-xs px-3 py-1 rounded-full font-bold flex items-center gap-1">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-storeweb-primary text-white text-xs px-3 py-1 rounded-full font-bold flex items-center gap-1">
                <Store size={12} /> SELLER CENTRAL
             </div>
          )}
@@ -152,7 +152,7 @@ const Auth: React.FC = () => {
                  required 
                  value={name} 
                  onChange={e => setName(e.target.value)} 
-                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-violet-200 outline-none transition-colors" 
+                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-storeweb-primary focus:ring-2 focus:ring-sky-200 outline-none transition-colors" 
                  placeholder="First and last name"
                />
              </div>
@@ -165,8 +165,8 @@ const Auth: React.FC = () => {
                required 
                value={email} 
                onChange={e => setEmail(e.target.value)} 
-               className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-violet-200 outline-none transition-colors" 
-               placeholder={isAdminMode ? "admin@amazonia.com" : (isSellerMode ? "seller@example.com" : "")}
+               className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-storeweb-primary focus:ring-2 focus:ring-sky-200 outline-none transition-colors" 
+               placeholder={isAdminMode ? "admin@storeweb.com" : (isSellerMode ? "seller@example.com" : "")}
              />
            </div>
 
@@ -178,7 +178,7 @@ const Auth: React.FC = () => {
                  required 
                  value={password}
                  onChange={e => setPassword(e.target.value)}
-                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-amazonia-orange focus:ring-2 focus:ring-violet-200 outline-none transition-colors pr-10" 
+                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white text-gray-900 focus:border-storeweb-primary focus:ring-2 focus:ring-sky-200 outline-none transition-colors pr-10" 
                  placeholder={isAdminMode ? "admin" : "At least 6 characters"}
                />
                <button
@@ -191,20 +191,20 @@ const Auth: React.FC = () => {
              </div>
            </div>
 
-           <button type="submit" className={`w-full rounded py-1.5 shadow-sm text-sm border mt-2 ${isSellerMode ? 'bg-amazonia-blue text-white hover:bg-amazonia-light border-transparent' : 'bg-amazonia-yellow hover:bg-amazonia-orange border-transparent text-white'}`}>
-             {isAdminMode ? 'Login as Admin' : (isLogin ? 'Sign in' : (isSellerMode ? 'Register as Seller' : 'Create your Amazonia account'))}
+           <button type="submit" className={`w-full rounded py-1.5 shadow-sm text-sm border mt-2 transition-colors ${isSellerMode ? 'bg-storeweb-dark text-white hover:bg-slate-700 border-transparent' : 'bg-storeweb-primary hover:bg-storeweb-hover border-transparent text-white'}`}>
+             {isAdminMode ? 'Login as Admin' : (isLogin ? 'Sign in' : (isSellerMode ? 'Register as Seller' : 'Create your StoreWeb account'))}
            </button>
          </form>
 
          {!isAdminMode && (
            <>
              <div className="mt-8 text-xs text-gray-600">
-               By continuing, you agree to Amazonia's Conditions of Use and Privacy Notice.
+               By continuing, you agree to StoreWeb's Conditions of Use and Privacy Notice.
              </div>
 
              <div className="relative mt-8 text-center">
                 <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-300"></div></div>
-                <div className="relative bg-white px-2 text-xs text-gray-500">{isSellerMode ? 'New to Selling?' : 'New to Amazonia?'}</div>
+                <div className="relative bg-white px-2 text-xs text-gray-500">{isSellerMode ? 'New to Selling?' : 'New to StoreWeb?'}</div>
              </div>
 
              <button 
@@ -213,9 +213,9 @@ const Auth: React.FC = () => {
                  setError('');
                  setShowPassword(false);
                }}
-               className="w-full mt-4 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded py-1.5 text-sm shadow-sm"
+               className="w-full mt-4 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded py-1.5 text-sm shadow-sm transition-colors"
              >
-               {isLogin ? (isSellerMode ? 'Create your Seller account' : 'Create your Amazonia account') : 'Sign in to existing account'}
+               {isLogin ? (isSellerMode ? 'Create your Seller account' : 'Create your StoreWeb account') : 'Sign in to existing account'}
              </button>
            </>
          )}
@@ -223,9 +223,9 @@ const Auth: React.FC = () => {
          <div className="mt-6 pt-6 border-t flex justify-between items-center">
            <button 
              onClick={toggleSellerMode}
-             className="text-xs text-amazonia-blue hover:text-orange-700 hover:underline"
+             className="text-xs text-storeweb-accent hover:text-storeweb-primary hover:underline"
            >
-             {isSellerMode ? 'Return to Consumer Login' : 'Selling on Amazonia? Login here'}
+             {isSellerMode ? 'Return to Consumer Login' : 'Selling on StoreWeb? Login here'}
            </button>
            
            <button 
@@ -240,7 +240,7 @@ const Auth: React.FC = () => {
        
        {isAdminMode && (
          <div className="mt-4 text-xs text-gray-500 max-w-sm text-center bg-gray-50 p-2 rounded border">
-           <b>Demo Hint:</b> Use <code>admin@amazonia.com</code> / <code>admin</code>
+           <b>Demo Hint:</b> Use <code>admin@storeweb.com</code> / <code>admin</code>
          </div>
        )}
        {isSellerMode && (

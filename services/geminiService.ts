@@ -7,7 +7,7 @@ export const getProductAnalysis = async (product: Product, query: string): Promi
   try {
     const model = 'gemini-2.5-flash';
     const prompt = `
-      You are an expert Amazon product assistant. 
+      You are an expert StoreWeb product assistant. 
       Product Details:
       Title: ${product.title}
       Description: ${product.description}
@@ -57,7 +57,7 @@ export const createChatSession = (contextData: string): Chat => {
     model: 'gemini-2.5-flash',
     config: {
       systemInstruction: `
-        You are Amazonia's advanced AI customer support agent.
+        You are StoreWeb's advanced AI customer support agent.
         You are helpful, polite, concise, and professional.
         
         You have access to the following context data in JSON format:

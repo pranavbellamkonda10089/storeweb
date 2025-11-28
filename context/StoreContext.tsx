@@ -33,7 +33,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   
   // Mock Database of Users
   const [registeredUsers, setRegisteredUsers] = useState<User[]>([
-    { id: 'admin1', name: 'Super Admin', email: 'admin@amazonia.com', password: 'admin', role: 'ADMIN' },
+    { id: 'admin1', name: 'Super Admin', email: 'admin@storeweb.com', password: 'admin', role: 'ADMIN' },
     { id: 'u1', name: 'John Customer', email: 'john@example.com', password: 'password', role: 'CUSTOMER' },
     { id: 's1', name: 'Jane Seller', email: 'seller@example.com', password: 'password', role: 'SELLER' }
   ]);

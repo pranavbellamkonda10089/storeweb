@@ -69,26 +69,26 @@ const SellerDashboard: React.FC = () => {
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-64 bg-white border-r border-gray-200 hidden md:block">
-        <div className="p-6 border-b border-gray-100">
-           <h1 className="text-xl font-bold text-amazonia-dark">Seller Central</h1>
-           <p className="text-xs text-gray-500">Welcome, {user.name}</p>
+        <div className="p-6 border-b border-gray-100 bg-storeweb-dark">
+           <h1 className="text-xl font-bold text-white">Seller Central</h1>
+           <p className="text-xs text-sky-200">Welcome, {user.name}</p>
         </div>
         <nav className="p-4 space-y-1">
            <button 
              onClick={() => setActiveTab('orders')}
-             className={`flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${activeTab === 'orders' ? 'bg-blue-50 text-amazonia-blue' : 'text-gray-600 hover:bg-gray-50'}`}
+             className={`flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${activeTab === 'orders' ? 'bg-sky-50 text-storeweb-primary' : 'text-gray-600 hover:bg-gray-50'}`}
            >
              <Package size={18} /> Manage Orders
            </button>
            <button 
              onClick={() => setActiveTab('add_product')}
-             className={`flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${activeTab === 'add_product' ? 'bg-blue-50 text-amazonia-blue' : 'text-gray-600 hover:bg-gray-50'}`}
+             className={`flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${activeTab === 'add_product' ? 'bg-sky-50 text-storeweb-primary' : 'text-gray-600 hover:bg-gray-50'}`}
            >
              <PlusCircle size={18} /> Add Product
            </button>
            <button 
              onClick={() => setActiveTab('profile')}
-             className={`flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${activeTab === 'profile' ? 'bg-blue-50 text-amazonia-blue' : 'text-gray-600 hover:bg-gray-50'}`}
+             className={`flex items-center gap-3 w-full px-4 py-3 text-sm font-medium rounded-md transition-colors ${activeTab === 'profile' ? 'bg-sky-50 text-storeweb-primary' : 'text-gray-600 hover:bg-gray-50'}`}
            >
              <Settings size={18} /> Seller Profile
            </button>
@@ -100,9 +100,9 @@ const SellerDashboard: React.FC = () => {
         
         {/* Mobile Nav */}
         <div className="md:hidden flex gap-2 mb-6 overflow-x-auto pb-2">
-           <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap ${activeTab === 'orders' ? 'bg-amazonia-blue text-white' : 'bg-white border'}`}>Orders</button>
-           <button onClick={() => setActiveTab('add_product')} className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap ${activeTab === 'add_product' ? 'bg-amazonia-blue text-white' : 'bg-white border'}`}>Add Product</button>
-           <button onClick={() => setActiveTab('profile')} className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap ${activeTab === 'profile' ? 'bg-amazonia-blue text-white' : 'bg-white border'}`}>Profile</button>
+           <button onClick={() => setActiveTab('orders')} className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap ${activeTab === 'orders' ? 'bg-storeweb-primary text-white' : 'bg-white border'}`}>Orders</button>
+           <button onClick={() => setActiveTab('add_product')} className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap ${activeTab === 'add_product' ? 'bg-storeweb-primary text-white' : 'bg-white border'}`}>Add Product</button>
+           <button onClick={() => setActiveTab('profile')} className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap ${activeTab === 'profile' ? 'bg-storeweb-primary text-white' : 'bg-white border'}`}>Profile</button>
         </div>
 
         {/* ORDERS TAB */}
@@ -117,7 +117,7 @@ const SellerDashboard: React.FC = () => {
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                   <div className="text-gray-500 text-sm font-medium">Pending Shipments</div>
-                  <div className="text-3xl font-bold text-violet-600 mt-1">{orders.filter(o => o.status === OrderStatus.PENDING).length}</div>
+                  <div className="text-3xl font-bold text-storeweb-primary mt-1">{orders.filter(o => o.status === OrderStatus.PENDING).length}</div>
               </div>
               <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
                   <div className="text-gray-500 text-sm font-medium">Total Revenue</div>
@@ -144,7 +144,7 @@ const SellerDashboard: React.FC = () => {
                     ) : (
                       orders.map(order => (
                         <tr key={order.id} className="bg-white border-b hover:bg-gray-50">
-                            <td className="px-6 py-4 font-medium text-amazonia-blue">#{order.id}</td>
+                            <td className="px-6 py-4 font-medium text-storeweb-accent">#{order.id}</td>
                             <td className="px-6 py-4">{new Date(order.date).toLocaleDateString()}</td>
                             <td className="px-6 py-4">{order.shippingAddress.fullName}</td>
                             <td className="px-6 py-4 font-bold">₹{order.total.toFixed(2)}</td>
@@ -159,7 +159,7 @@ const SellerDashboard: React.FC = () => {
                               <select 
                                 value={order.status}
                                 onChange={(e) => updateOrderStatus(order.id, e.target.value as OrderStatus)}
-                                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-amazonia-orange focus:border-amazonia-orange block w-full p-1.5"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded focus:ring-storeweb-primary focus:border-storeweb-primary block w-full p-1.5"
                               >
                                   {Object.values(OrderStatus).map(status => (
                                     <option key={status} value={status}>{status}</option>
@@ -189,7 +189,7 @@ const SellerDashboard: React.FC = () => {
                     type="text" 
                     value={newProduct.title}
                     onChange={e => setNewProduct({...newProduct, title: e.target.value})}
-                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-amazonia-orange focus:border-amazonia-orange outline-none"
+                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-storeweb-primary focus:border-storeweb-primary outline-none"
                     placeholder="e.g. Wireless Headphones"
                   />
                 </div>
@@ -204,7 +204,7 @@ const SellerDashboard: React.FC = () => {
                         type="number" 
                         value={newProduct.price}
                         onChange={e => setNewProduct({...newProduct, price: e.target.value})}
-                        className="w-full border border-gray-300 rounded-md p-2 pl-7 text-sm focus:ring-1 focus:ring-amazonia-orange focus:border-amazonia-orange outline-none"
+                        className="w-full border border-gray-300 rounded-md p-2 pl-7 text-sm focus:ring-1 focus:ring-storeweb-primary focus:border-storeweb-primary outline-none"
                         placeholder="0.00"
                       />
                     </div>
@@ -214,7 +214,7 @@ const SellerDashboard: React.FC = () => {
                     <select 
                       value={newProduct.category}
                       onChange={e => setNewProduct({...newProduct, category: e.target.value})}
-                      className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-amazonia-orange outline-none"
+                      className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-storeweb-primary outline-none"
                     >
                       <option value="Electronics">Electronics</option>
                       <option value="Computers">Computers</option>
@@ -233,7 +233,7 @@ const SellerDashboard: React.FC = () => {
                     rows={4}
                     value={newProduct.description}
                     onChange={e => setNewProduct({...newProduct, description: e.target.value})}
-                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-amazonia-orange outline-none"
+                    className="w-full border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-storeweb-primary outline-none"
                     placeholder="Product features and details..."
                   />
                 </div>
@@ -245,7 +245,7 @@ const SellerDashboard: React.FC = () => {
                       type="text" 
                       value={newProduct.image}
                       onChange={e => setNewProduct({...newProduct, image: e.target.value})}
-                      className="flex-1 border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-amazonia-orange outline-none"
+                      className="flex-1 border border-gray-300 rounded-md p-2 text-sm focus:ring-1 focus:ring-storeweb-primary outline-none"
                       placeholder="https://example.com/image.jpg"
                     />
                     <button type="button" className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded px-3">
@@ -255,21 +255,21 @@ const SellerDashboard: React.FC = () => {
                   <p className="text-xs text-gray-500 mt-1">Leave blank for a random placeholder image.</p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-blue-50 p-3 rounded border border-blue-100">
+                <div className="flex items-center gap-2 bg-sky-50 p-3 rounded border border-sky-100">
                   <input 
                     type="checkbox" 
                     id="isPrime"
                     checked={newProduct.isPrime}
                     onChange={e => setNewProduct({...newProduct, isPrime: e.target.checked})}
-                    className="w-4 h-4 text-amazonia-blue rounded focus:ring-amazonia-blue"
+                    className="w-4 h-4 text-storeweb-primary rounded focus:ring-storeweb-primary"
                   />
                   <label htmlFor="isPrime" className="text-sm text-gray-700 font-medium flex items-center gap-1">
-                     Enable <span className="text-amazonia-blue font-bold italic">prime</span> shipping for this item
+                     Enable <span className="text-storeweb-primary font-bold italic">prime</span> shipping for this item
                   </label>
                 </div>
 
                 <div className="pt-4 border-t">
-                  <button type="submit" className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white font-medium py-2 rounded-md shadow-sm transition-colors">
+                  <button type="submit" className="w-full bg-storeweb-primary hover:bg-storeweb-hover text-white font-medium py-2 rounded-md shadow-sm transition-colors">
                     Save and List Product
                   </button>
                 </div>
@@ -287,7 +287,7 @@ const SellerDashboard: React.FC = () => {
                {/* Business Info */}
                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <UserCheck size={20} className="text-amazonia-blue"/> Business Information
+                    <UserCheck size={20} className="text-storeweb-primary"/> Business Information
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div>
@@ -315,7 +315,7 @@ const SellerDashboard: React.FC = () => {
                {/* Address */}
                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <MapPin size={20} className="text-amazonia-blue"/> Registered Business Address
+                    <MapPin size={20} className="text-storeweb-primary"/> Registered Business Address
                   </h3>
                   <div className="space-y-4">
                      <div>
@@ -348,7 +348,7 @@ const SellerDashboard: React.FC = () => {
                {/* Bank Details */}
                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <CreditCard size={20} className="text-amazonia-blue"/> Bank Account for Payouts
+                    <CreditCard size={20} className="text-storeweb-primary"/> Bank Account for Payouts
                   </h3>
                   <div className="space-y-4">
                      <div>
@@ -386,7 +386,7 @@ const SellerDashboard: React.FC = () => {
                {/* Documents */}
                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <FileText size={20} className="text-amazonia-blue"/> Identity & Documents
+                    <FileText size={20} className="text-storeweb-primary"/> Identity & Documents
                   </h3>
                   <div className="space-y-4">
                     <div 
@@ -409,7 +409,7 @@ const SellerDashboard: React.FC = () => {
                </div>
 
                <div className="flex justify-end">
-                 <button type="submit" className="bg-amazonia-yellow hover:bg-amazonia-orange text-white font-bold py-2 px-8 rounded shadow-sm">
+                 <button type="submit" className="bg-storeweb-primary hover:bg-storeweb-hover text-white font-bold py-2 px-8 rounded shadow-sm">
                    Save Profile & Documents
                  </button>
                </div>

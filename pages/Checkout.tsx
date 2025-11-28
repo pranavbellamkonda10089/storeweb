@@ -32,7 +32,7 @@ const Checkout: React.FC = () => {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-gradient-to-b from-gray-50 to-gray-100 border-b p-4 flex items-center justify-between">
-         <div className="text-2xl font-bold tracking-tight text-black">amazonia<span className="text-xs font-normal">.clone</span> <span className="text-gray-500 font-normal text-xl">Checkout</span></div>
+         <div className="text-2xl font-bold tracking-tight text-black">storeweb<span className="text-xs font-normal text-sky-500">.clone</span> <span className="text-gray-500 font-normal text-xl text-black">Checkout</span></div>
          <Lock size={20} className="text-gray-500" />
       </div>
 
@@ -41,28 +41,28 @@ const Checkout: React.FC = () => {
           
           {/* Address Section */}
           <div className="bg-white border-b pb-4">
-            <h2 className="text-lg font-bold text-amazonia-orange mb-4">1 Shipping address</h2>
+            <h2 className="text-lg font-bold text-storeweb-primary mb-4">1 Shipping address</h2>
             <div className="space-y-3 max-w-md">
               <div className="space-y-1">
                 <label className="text-sm font-bold">Full name</label>
-                <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-violet-500 outline-none" value={address.fullName} onChange={e => setAddress({...address, fullName: e.target.value})} />
+                <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none" value={address.fullName} onChange={e => setAddress({...address, fullName: e.target.value})} />
               </div>
               <div className="space-y-1">
                 <label className="text-sm font-bold">Address</label>
-                <input type="text" placeholder="Street address" className="w-full border rounded p-1.5 mb-2" value={address.street} onChange={e => setAddress({...address, street: e.target.value})} />
+                <input type="text" placeholder="Street address" className="w-full border rounded p-1.5 mb-2 focus:ring-1 ring-sky-500 outline-none" value={address.street} onChange={e => setAddress({...address, street: e.target.value})} />
               </div>
               <div className="grid grid-cols-3 gap-2">
                  <div className="space-y-1">
                     <label className="text-sm font-bold">City</label>
-                    <input type="text" className="w-full border rounded p-1.5" value={address.city} onChange={e => setAddress({...address, city: e.target.value})}/>
+                    <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none" value={address.city} onChange={e => setAddress({...address, city: e.target.value})}/>
                  </div>
                  <div className="space-y-1">
                     <label className="text-sm font-bold">State</label>
-                    <input type="text" className="w-full border rounded p-1.5" value={address.state} onChange={e => setAddress({...address, state: e.target.value})}/>
+                    <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none" value={address.state} onChange={e => setAddress({...address, state: e.target.value})}/>
                  </div>
                  <div className="space-y-1">
                     <label className="text-sm font-bold">Zip</label>
-                    <input type="text" className="w-full border rounded p-1.5" value={address.zip} onChange={e => setAddress({...address, zip: e.target.value})}/>
+                    <input type="text" className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none" value={address.zip} onChange={e => setAddress({...address, zip: e.target.value})}/>
                  </div>
               </div>
             </div>
@@ -70,10 +70,10 @@ const Checkout: React.FC = () => {
 
           {/* Payment Section (Dummy) */}
           <div className="bg-white border-b pb-4">
-            <h2 className="text-lg font-bold text-amazonia-orange mb-4">2 Payment method</h2>
+            <h2 className="text-lg font-bold text-storeweb-primary mb-4">2 Payment method</h2>
             <div className="border rounded-md p-4 bg-gray-50">
                <div className="flex items-center gap-2 mb-2">
-                  <input type="radio" checked readOnly className="text-violet-600" />
+                  <input type="radio" checked readOnly className="text-sky-600" />
                   <span className="font-bold">Credit or Debit Card</span>
                </div>
                <div className="ml-6 space-y-2 max-w-xs">
@@ -88,7 +88,7 @@ const Checkout: React.FC = () => {
 
           {/* Review Items */}
           <div className="bg-white">
-            <h2 className="text-lg font-bold text-amazonia-orange mb-4">3 Review items and shipping</h2>
+            <h2 className="text-lg font-bold text-storeweb-primary mb-4">3 Review items and shipping</h2>
             <div className="border rounded p-4">
               {cart.map(item => (
                 <div key={item.id} className="flex gap-4 mb-4">
@@ -111,12 +111,12 @@ const Checkout: React.FC = () => {
              <button 
                 onClick={handlePlaceOrder}
                 disabled={loading}
-                className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white rounded-md py-2 text-sm shadow-sm mb-4 disabled:opacity-50 transition-colors"
+                className="w-full bg-storeweb-primary hover:bg-storeweb-hover text-white rounded-md py-2 text-sm shadow-sm mb-4 disabled:opacity-50 transition-colors"
              >
                {loading ? 'Processing...' : 'Place your order'}
              </button>
              <p className="text-xs text-center text-gray-500 mb-4 px-2">
-               By placing your order, you agree to Amazonia Clone's fake privacy notice and conditions of use.
+               By placing your order, you agree to StoreWeb Clone's fake privacy notice and conditions of use.
              </p>
              <div className="border-t pt-4 space-y-1 text-sm text-gray-700">
                <div className="flex justify-between"><span>Items:</span> <span>₹{subtotal.toFixed(2)}</span></div>

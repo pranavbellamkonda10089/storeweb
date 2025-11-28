@@ -21,8 +21,8 @@ const Cart: React.FC = () => {
   if (cart.length === 0) {
     return (
        <div className="max-w-screen-xl mx-auto p-8 bg-white mt-4 shadow-sm min-h-[400px]">
-         <h1 className="text-2xl font-medium mb-4">Your Amazonia Cart is empty.</h1>
-         <Link to="/" className="text-amazonia-blue hover:underline hover:text-orange-700">Continue shopping</Link>
+         <h1 className="text-2xl font-medium mb-4">Your StoreWeb Cart is empty.</h1>
+         <Link to="/" className="text-storeweb-accent hover:underline hover:text-storeweb-primary">Continue shopping</Link>
        </div>
     )
   }
@@ -43,12 +43,12 @@ const Cart: React.FC = () => {
                   <img src={item.image} alt={item.title} className="w-40 h-40 object-contain" />
                 </Link>
                 <div className="flex-1">
-                  <Link to={`/product/${item.id}`} className="text-lg font-medium text-amazonia-blue hover:underline line-clamp-2">
+                  <Link to={`/product/${item.id}`} className="text-lg font-medium text-storeweb-accent hover:underline line-clamp-2">
                     {item.title}
                   </Link>
                   <div className="text-green-700 text-xs mt-1">In Stock</div>
                   <div className="flex items-center gap-2 mt-1 mb-2">
-                    <img src="https://m.media-amazon.com/images/G/01/marketing/prime/Prime_Logo_RGB._CB633638691_.png" alt="Prime" className="h-4" />
+                    <span className="text-xs text-storeweb-primary font-bold italic">prime</span>
                     <span className="text-xs text-gray-500">FREE Delivery</span>
                   </div>
                   
@@ -65,8 +65,8 @@ const Cart: React.FC = () => {
                         ))}
                       </select>
                     </div>
-                    <button onClick={() => removeFromCart(item.id)} className="text-amazonia-blue hover:underline text-xs">Delete</button>
-                    <button className="text-amazonia-blue hover:underline text-xs">Save for later</button>
+                    <button onClick={() => removeFromCart(item.id)} className="text-storeweb-accent hover:underline text-xs">Delete</button>
+                    <button className="text-storeweb-accent hover:underline text-xs">Save for later</button>
                   </div>
                 </div>
                 <div className="text-right font-bold text-lg">
@@ -88,7 +88,7 @@ const Cart: React.FC = () => {
            </div>
            <button 
              onClick={handleCheckout}
-             className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white rounded-md py-2 shadow-sm text-sm transition-colors"
+             className="w-full bg-storeweb-primary hover:bg-storeweb-hover text-white rounded-md py-2 shadow-sm text-sm transition-colors"
            >
              Proceed to checkout
            </button>

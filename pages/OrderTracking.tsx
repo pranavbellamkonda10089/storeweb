@@ -15,10 +15,10 @@ const OrderTracking: React.FC = () => {
        <h1 className="text-2xl font-normal mb-6">Your Orders</h1>
        
        <div className="flex gap-4 text-sm border-b mb-4">
-          <span className="font-bold border-b-2 border-amazonia-orange pb-2 text-black cursor-pointer">Orders</span>
-          <span className="text-amazonia-blue cursor-pointer">Buy Again</span>
-          <span className="text-amazonia-blue cursor-pointer">Not Yet Shipped</span>
-          <span className="text-amazonia-blue cursor-pointer">Cancelled Orders</span>
+          <span className="font-bold border-b-2 border-storeweb-primary pb-2 text-black cursor-pointer">Orders</span>
+          <span className="text-storeweb-accent cursor-pointer">Buy Again</span>
+          <span className="text-storeweb-accent cursor-pointer">Not Yet Shipped</span>
+          <span className="text-storeweb-accent cursor-pointer">Cancelled Orders</span>
        </div>
 
        <div className="space-y-6">
@@ -37,12 +37,12 @@ const OrderTracking: React.FC = () => {
                     </div>
                     <div>
                        <div className="uppercase">Ship To</div>
-                       <div className="text-amazonia-blue hover:underline cursor-pointer">{user.name}</div>
+                       <div className="text-storeweb-accent hover:underline cursor-pointer">{user.name}</div>
                     </div>
                  </div>
                  <div>
                     <div className="uppercase">Order # {order.id}</div>
-                    <div className="flex gap-2 text-amazonia-blue">
+                    <div className="flex gap-2 text-storeweb-accent">
                       <span className="hover:underline cursor-pointer">View order details</span> 
                       <span className="text-gray-400">|</span> 
                       <Link to={`/invoice/${order.id}`} className="hover:underline cursor-pointer">Invoice</Link>
@@ -53,13 +53,13 @@ const OrderTracking: React.FC = () => {
               {/* Order Body */}
               <div className="p-4">
                  <h3 className="font-bold text-lg mb-4 text-gray-800 flex items-center gap-2">
-                    {order.status === OrderStatus.DELIVERED ? <CheckCircle className="text-green-600" /> : <Truck className="text-amazonia-orange" />}
+                    {order.status === OrderStatus.DELIVERED ? <CheckCircle className="text-green-600" /> : <Truck className="text-storeweb-primary" />}
                     {order.status}
                  </h3>
                  
                  {/* Progress Bar */}
                  <div className="w-full bg-gray-200 rounded-full h-2.5 mb-6 max-w-lg">
-                    <div className={`bg-green-600 h-2.5 rounded-full transition-all duration-500`} style={{
+                    <div className={`bg-storeweb-primary h-2.5 rounded-full transition-all duration-500`} style={{
                       width: order.status === OrderStatus.PENDING ? '10%' : 
                              order.status === OrderStatus.PROCESSING ? '30%' :
                              order.status === OrderStatus.SHIPPED ? '60%' : '100%'
@@ -71,9 +71,9 @@ const OrderTracking: React.FC = () => {
                      <div key={item.id} className="flex gap-4">
                         <img src={item.image} className="w-20 h-20 object-contain" />
                         <div>
-                           <div className="font-bold text-amazonia-blue hover:underline text-sm">{item.title}</div>
+                           <div className="font-bold text-storeweb-accent hover:underline text-sm">{item.title}</div>
                            <div className="text-xs text-gray-500">Return window closed on Nov 20, 2023</div>
-                           <button className="mt-2 bg-amazonia-yellow hover:bg-amazonia-orange text-white px-3 py-1 rounded-md text-xs shadow-sm transition-colors">Buy it again</button>
+                           <button className="mt-2 bg-storeweb-primary hover:bg-storeweb-hover text-white px-3 py-1 rounded-md text-xs shadow-sm transition-colors">Buy it again</button>
                         </div>
                      </div>
                    ))}

@@ -64,8 +64,8 @@ const ProductDetails: React.FC = () => {
         {/* Images */}
         <div className="md:col-span-4 lg:col-span-5 flex gap-4 sticky top-24 self-start">
            <div className="flex flex-col gap-2">
-              <img src={product.image} className="w-10 h-10 border hover:border-amazonia-orange cursor-pointer" onMouseEnter={() => setActiveImage(product.image)} />
-              <img src="https://picsum.photos/id/10/400/400" className="w-10 h-10 border hover:border-amazonia-orange cursor-pointer" onMouseEnter={() => setActiveImage("https://picsum.photos/id/10/400/400")} />
+              <img src={product.image} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer" onMouseEnter={() => setActiveImage(product.image)} />
+              <img src="https://picsum.photos/id/10/400/400" className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer" onMouseEnter={() => setActiveImage("https://picsum.photos/id/10/400/400")} />
            </div>
            <div className="flex-1">
              <img src={activeImage} alt={product.title} className="w-full max-h-[500px] object-contain" />
@@ -79,7 +79,7 @@ const ProductDetails: React.FC = () => {
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
               </div>
-              <span className="text-amazonia-blue text-sm hover:underline">{product.reviewCount} ratings</span>
+              <span className="text-storeweb-accent text-sm hover:underline">{product.reviewCount} ratings</span>
            </div>
            <div className="border-t border-b border-gray-200 py-4 my-4">
               <div className="flex items-start gap-1">
@@ -95,9 +95,9 @@ const ProductDetails: React.FC = () => {
            </div>
 
            {/* AI Assistant */}
-           <div className="mt-8 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
-             <h3 className="font-bold text-sm text-indigo-900 flex items-center gap-2 mb-2">
-               <span className="bg-indigo-600 text-white text-xs px-1 rounded">AI</span>
+           <div className="mt-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
+             <h3 className="font-bold text-sm text-slate-800 flex items-center gap-2 mb-2">
+               <span className="bg-storeweb-dark text-white text-xs px-1 rounded">AI</span>
                Ask about this product
              </h3>
              <div className="flex gap-2 mb-2">
@@ -106,14 +106,14 @@ const ProductDetails: React.FC = () => {
                  value={userQuery}
                  onChange={(e) => setUserQuery(e.target.value)}
                  placeholder="Is this good for gaming?"
-                 className="flex-1 border rounded px-2 py-1 text-sm focus:outline-indigo-500"
+                 className="flex-1 border border-slate-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-storeweb-primary"
                />
-               <button onClick={handleAiQuery} className="bg-indigo-600 text-white p-1 rounded hover:bg-indigo-700">
+               <button onClick={handleAiQuery} className="bg-storeweb-primary text-white p-1 rounded hover:bg-storeweb-hover transition-colors">
                  <Send size={16} />
                </button>
              </div>
              {isTyping && <p className="text-xs text-gray-500 animate-pulse">AI is thinking...</p>}
-             {aiResponse && <p className="text-sm text-gray-800 bg-white p-2 rounded border border-blue-100 mt-2">{aiResponse}</p>}
+             {aiResponse && <p className="text-sm text-gray-800 bg-white p-2 rounded border border-slate-200 mt-2 shadow-sm">{aiResponse}</p>}
            </div>
         </div>
 
@@ -123,7 +123,7 @@ const ProductDetails: React.FC = () => {
              <div className="text-2xl font-medium text-red-700 mb-2">₹{product.price.toFixed(2)}</div>
              <div className="text-sm text-gray-600 mb-4">
                 FREE delivery <b>Monday, Nov 15</b>.
-                <div className="flex items-center gap-1 text-xs mt-1 text-amazonia-blue">
+                <div className="flex items-center gap-1 text-xs mt-1 text-storeweb-accent">
                    <MapPin size={12} /> Deliver to New York 10001
                 </div>
              </div>
@@ -131,17 +131,17 @@ const ProductDetails: React.FC = () => {
              
              <button 
                onClick={() => addToCart(product, 1)}
-               className="w-full bg-amazonia-yellow hover:bg-amazonia-orange text-white rounded-full py-2 text-sm mb-2 shadow-sm transition-colors"
+               className="w-full bg-storeweb-primary hover:bg-storeweb-hover text-white rounded-full py-2 text-sm mb-2 shadow-sm transition-colors font-medium"
              >
                Add to Cart
              </button>
-             <button className="w-full bg-amazonia-orange hover:bg-indigo-700 text-white rounded-full py-2 text-sm mb-4 shadow-sm transition-colors">
+             <button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-2 text-sm mb-4 shadow-sm transition-colors font-medium">
                Buy Now
              </button>
              
              <div className="text-xs text-gray-500 grid grid-cols-2 gap-y-1">
-                <span>Ships from</span> <span>Amazonia</span>
-                <span>Sold by</span> <span>Amazonia Services</span>
+                <span>Ships from</span> <span>StoreWeb</span>
+                <span>Sold by</span> <span>StoreWeb Services</span>
              </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ const ProductDetails: React.FC = () => {
                className="text-sm border border-gray-300 shadow-sm rounded-md px-4 py-2 hover:bg-gray-50 w-full mb-4 text-left flex justify-between items-center"
              >
                <span>Summarize reviews with AI</span>
-               <span className="text-xs bg-gradient-to-r from-blue-500 to-purple-500 text-white px-1 rounded">Beta</span>
+               <span className="text-xs bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-1 rounded">Beta</span>
              </button>
              {summary && (
                <div className="bg-gray-50 p-3 rounded text-sm text-gray-800 mb-4 border border-gray-200">
@@ -179,9 +179,9 @@ const ProductDetails: React.FC = () => {
              {/* Add Review */}
              <div className="border p-4 rounded bg-gray-50 mt-4">
                <h3 className="font-bold text-sm mb-2">Write a review</h3>
-               <input className="w-full border p-2 mb-2 text-sm" placeholder="Title" value={reviewForm.title} onChange={e => setReviewForm({...reviewForm, title: e.target.value})}/>
-               <textarea className="w-full border p-2 mb-2 text-sm" placeholder="Review text" value={reviewForm.text} onChange={e => setReviewForm({...reviewForm, text: e.target.value})} />
-               <button onClick={submitReview} className="w-full border border-gray-300 bg-white hover:bg-gray-100 py-1 text-sm rounded shadow-sm">Submit Review</button>
+               <input className="w-full border p-2 mb-2 text-sm rounded" placeholder="Title" value={reviewForm.title} onChange={e => setReviewForm({...reviewForm, title: e.target.value})}/>
+               <textarea className="w-full border p-2 mb-2 text-sm rounded" placeholder="Review text" value={reviewForm.text} onChange={e => setReviewForm({...reviewForm, text: e.target.value})} />
+               <button onClick={submitReview} className="w-full border border-gray-300 bg-white hover:bg-gray-100 py-1 text-sm rounded shadow-sm transition-colors">Submit Review</button>
              </div>
            </div>
 
@@ -189,7 +189,7 @@ const ProductDetails: React.FC = () => {
              {productReviews.map((review) => (
                <div key={review.id} className="border-b pb-6">
                  <div className="flex items-center gap-2 mb-1">
-                   <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs">{review.userName[0]}</div>
+                   <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs text-slate-700 font-bold">{review.userName[0]}</div>
                    <span className="text-sm font-medium">{review.userName}</span>
                  </div>
                  <div className="flex items-center gap-2 mb-2">
@@ -200,7 +200,7 @@ const ProductDetails: React.FC = () => {
                  </div>
                  <div className="text-xs text-gray-500 mb-2">Reviewed on {review.date}</div>
                  {review.verifiedPurchase && (
-                   <div className="text-xs text-indigo-700 font-bold mb-2">Verified Purchase</div>
+                   <div className="text-xs text-storeweb-primary font-bold mb-2">Verified Purchase</div>
                  )}
                  <p className="text-sm text-gray-800 mb-3">{review.text}</p>
                  

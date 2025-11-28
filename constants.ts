@@ -1,3 +1,4 @@
+
 import { Product, Review } from './types';
 
 export const MOCK_PRODUCTS: Product[] = [
@@ -8,6 +9,7 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 1250,
     image: 'https://picsum.photos/id/1/400/400',
+    images: ['https://picsum.photos/id/6/400/400', 'https://picsum.photos/id/7/400/400'],
     description: 'Industry-leading noise cancellation optimized to you. Magnificent Sound, engineered to perfection. Crystal clear hands-free calling.',
     category: 'Electronics',
     isPrime: true
@@ -19,6 +21,7 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 890,
     image: 'https://picsum.photos/id/2/400/400',
+    images: ['https://picsum.photos/id/48/400/400', 'https://picsum.photos/id/180/400/400'],
     description: 'Impossibly thin and incredibly fast. The 15-inch MacBook Air with M2 chip features a spacious Liquid Retina display.',
     category: 'Computers',
     isPrime: true
@@ -30,6 +33,7 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.7,
     reviewCount: 3400,
     image: 'https://picsum.photos/id/3/400/400',
+    images: ['https://picsum.photos/id/250/400/400'],
     description: 'Compact, lightweight design fits into tight areas. High performance motor delivers 300 unit watts out (UWO) of power ability.',
     category: 'Tools',
     isPrime: false
@@ -41,6 +45,7 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.6,
     reviewCount: 12000,
     image: 'https://picsum.photos/id/4/400/400',
+    images: ['https://picsum.photos/id/225/400/400', 'https://picsum.photos/id/292/400/400', 'https://picsum.photos/id/366/400/400'],
     description: '7-IN-1 FUNCTIONALITY: Pressure cook, slow cook, rice cooker, yogurt maker, steamer, sauté pan and food warmer.',
     category: 'Home & Kitchen',
     isPrime: true
@@ -52,6 +57,7 @@ export const MOCK_PRODUCTS: Product[] = [
     rating: 4.3,
     reviewCount: 560,
     image: 'https://picsum.photos/id/5/400/400',
+    images: ['https://picsum.photos/id/100/400/400'],
     description: 'Soft, breathable cotton. Perfect for everyday wear. Machine washable.',
     category: 'Clothing',
     isPrime: true

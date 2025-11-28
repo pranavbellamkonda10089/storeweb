@@ -1,3 +1,4 @@
+
 export interface Product {
   id: string;
   title: string;
@@ -5,6 +6,7 @@ export interface Product {
   rating: number;
   reviewCount: number;
   image: string;
+  images?: string[]; // Additional images for the carousel
   description: string;
   category: string;
   isPrime: boolean;

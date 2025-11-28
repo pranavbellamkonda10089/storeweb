@@ -30,7 +30,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {children}
       <Chatbot />
       {!isAuthPage && (
-        <footer className="bg-amazonia-light text-white text-center mt-auto text-sm">
+        <footer className="bg-storeweb-light text-white text-center mt-auto text-sm">
            <button 
              onClick={scrollToTop}
              className="w-full bg-[#37475a] hover:bg-[#485769] py-4 text-white font-medium transition-colors text-sm cursor-pointer"
@@ -44,27 +44,27 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                  <h3 className="font-bold text-white mb-2">Get to Know Us</h3>
                  <p className="cursor-pointer hover:underline">Careers</p>
                  <p className="cursor-pointer hover:underline">Blog</p>
-                 <p className="cursor-pointer hover:underline">About Amazonia</p>
+                 <p className="cursor-pointer hover:underline">About StoreWeb</p>
                </div>
                <div>
                  <h3 className="font-bold text-white mb-2">Make Money with Us</h3>
-                 <p className="cursor-pointer hover:underline">Sell products on Amazonia</p>
-                 <p className="cursor-pointer hover:underline">Sell on Amazonia Business</p>
+                 <p className="cursor-pointer hover:underline">Sell products on StoreWeb</p>
+                 <p className="cursor-pointer hover:underline">Sell on StoreWeb Business</p>
                </div>
                <div>
-                 <h3 className="font-bold text-white mb-2">Amazonia Payment</h3>
-                 <p className="cursor-pointer hover:underline">Amazonia Business Card</p>
+                 <h3 className="font-bold text-white mb-2">StoreWeb Payment</h3>
+                 <p className="cursor-pointer hover:underline">StoreWeb Business Card</p>
                  <p className="cursor-pointer hover:underline">Shop with Points</p>
                </div>
                <div>
                  <h3 className="font-bold text-white mb-2">Let Us Help You</h3>
-                 <p className="cursor-pointer hover:underline">Amazonia and COVID-19</p>
+                 <p className="cursor-pointer hover:underline">StoreWeb and COVID-19</p>
                  <p className="cursor-pointer hover:underline">Your Account</p>
                  <p className="cursor-pointer hover:underline">Your Orders</p>
                </div>
              </div>
              <div className="border-t border-gray-600 pt-4 mx-4">
-                © 1996-2023, Amazonia.com, Inc. or its affiliates
+                © 1996-2023, StoreWeb.com, Inc. or its affiliates
              </div>
            </div>
         </footer>
