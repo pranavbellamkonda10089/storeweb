@@ -1,29 +1,32 @@
+
 import { GoogleGenAI, Chat } from "@google/genai";
 import { Product } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// Always use the named parameter and obtain API key directly from process.env.API_KEY
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const getProductAnalysis = async (product: Product, query: string): Promise<string> => {
   try {
-    const model = 'gemini-2.5-flash';
-    const prompt = `
-      You are an expert StoreWeb product assistant. 
-      Product Details:
-      Title: ${product.title}
-      Description: ${product.description}
-      Price: ₹${product.price}
-      Category: ${product.category}
-      
-      User Question: ${query}
-      
-      Answer the user's question concisely based on the product details provided. If the answer isn't in the details, make a reasonable inference or state you don't know, but remain helpful and sales-oriented.
-    `;
-
+    // Using gemini-3-flash-preview for basic text tasks as per guidelines
+    const model = 'gemini-3-flash-preview';
     const response = await ai.models.generateContent({
       model: model,
-      contents: prompt,
+      contents: `User Question: ${query}`,
+      config: {
+        systemInstruction: `
+          You are an expert StoreWeb product assistant. 
+          Product Details:
+          Title: ${product.title}
+          Description: ${product.description}
+          Price: ₹${product.price}
+          Category: ${product.category}
+          
+          Answer the user's question concisely based on the product details provided. If the answer isn't in the details, make a reasonable inference or state you don't know, but remain helpful and sales-oriented.
+        `,
+      },
     });
 
+    // Use .text property to get the string content
     return response.text || "I couldn't generate a response at this time.";
   } catch (error) {
     console.error("Gemini API Error:", error);
@@ -33,17 +36,13 @@ export const getProductAnalysis = async (product: Product, query: string): Promi
 
 export const summarizeReviews = async (reviews: string[]): Promise<string> => {
   try {
-     const model = 'gemini-2.5-flash';
-     const prompt = `
-       Here are some customer reviews for a product:
-       ${reviews.join('\n---\n')}
-       
-       Please provide a concise summary of the pros and cons based on these reviews. Bullet points are preferred.
-     `;
-
+     const model = 'gemini-3-flash-preview';
      const response = await ai.models.generateContent({
        model: model,
-       contents: prompt,
+       contents: `Summarize these reviews:\n${reviews.join('\n---\n')}`,
+       config: {
+         systemInstruction: "Please provide a concise summary of the pros and cons based on these reviews. Bullet points are preferred.",
+       },
      });
 
      return response.text || "Could not summarize reviews.";
@@ -53,8 +52,9 @@ export const summarizeReviews = async (reviews: string[]): Promise<string> => {
 }
 
 export const createChatSession = (contextData: string): Chat => {
+  // Use gemini-3-flash-preview for general support tasks
   return ai.chats.create({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3-flash-preview',
     config: {
       systemInstruction: `
         You are StoreWeb's advanced AI customer support agent.

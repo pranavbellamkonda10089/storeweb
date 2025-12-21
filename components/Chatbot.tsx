@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Minimize2, Bot, User } from 'lucide-react';
 import { useStore } from '../context/StoreContext';
@@ -146,6 +147,7 @@ const Chatbot: React.FC = () => {
          chatSessionRef.current = createChatSession(contextData);
       }
       
+      // result.text is a property, not a method
       const result = await chatSessionRef.current.sendMessage({ message: userMsg });
       setMessages(prev => [...prev, { role: 'model', text: result.text || "I'm not sure how to answer that." }]);
     } catch (error) {

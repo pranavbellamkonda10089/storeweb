@@ -3,6 +3,28 @@ import { Product, Review } from './types';
 
 export const MOCK_PRODUCTS: Product[] = [
   {
+    id: 'w1',
+    title: 'Seiko Men\'s Essentials Stainless Steel Watch',
+    price: 245.00,
+    rating: 4.8,
+    reviewCount: 450,
+    image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&q=80&w=400&h=400',
+    description: 'A classic stainless steel chronograph. Features a sapphire crystal and 100m water resistance. Perfect for both formal and casual wear.',
+    category: 'Watch',
+    isPrime: true
+  },
+  {
+    id: 'g1',
+    title: 'Ray-Ban Classic Aviator Sunglasses',
+    price: 163.00,
+    rating: 4.9,
+    reviewCount: 2100,
+    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=400&h=400',
+    description: 'The iconic Aviator design. High-quality metal frame with polarized G-15 lenses for superior clarity and protection.',
+    category: 'Eyewear',
+    isPrime: true
+  },
+  {
     id: '1',
     title: 'Sony WH-1000XM5 Wireless Noise Canceling Headphones',
     price: 348.00,

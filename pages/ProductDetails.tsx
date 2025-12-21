@@ -1,10 +1,12 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
-import { Star, Truck, ShieldCheck, MapPin, Video, Image as ImageIcon, Send } from 'lucide-react';
+import { Star, Truck, ShieldCheck, MapPin, Video, Image as ImageIcon, Send, Camera } from 'lucide-react';
 import { Review, OrderStatus } from '../types';
 import { getProductAnalysis, summarizeReviews } from '../services/geminiService';
 import ImageMagnifier from '../components/ImageMagnifier';
+import VirtualTryOn from '../components/VirtualTryOn';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,13 +16,14 @@ const ProductDetails: React.FC = () => {
   const [userQuery, setUserQuery] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [summary, setSummary] = useState<string | null>(null);
+  const [showAR, setShowAR] = useState(false);
 
   // New Review Form State
   const [reviewForm, setReviewForm] = useState<{rating: number, title: string, text: string}>({
     rating: 5, title: '', text: ''
   });
 
-  const product = products.find(p => p.id === id) || products[0]; // Fallback for duplicated items
+  const product = products.find(p => p.id === id) || products[0]; 
   const productReviews = reviews[product.id] || [];
 
   useEffect(() => {
@@ -59,8 +62,20 @@ const ProductDetails: React.FC = () => {
     setReviewForm({ rating: 5, title: '', text: '' });
   };
 
+  const canTryOn = product.category.toLowerCase().includes('watch') || 
+                   product.category.toLowerCase().includes('eyewear') || 
+                   product.category.toLowerCase().includes('glasses');
+
   return (
     <div className="max-w-screen-xl mx-auto p-4 bg-white mt-4">
+      {showAR && (
+        <VirtualTryOn 
+          productImage={product.image} 
+          category={product.category} 
+          onClose={() => setShowAR(false)} 
+        />
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* Images */}
         <div className="md:col-span-4 lg:col-span-5 flex gap-4 sticky top-24 self-start z-30">
@@ -69,13 +84,31 @@ const ProductDetails: React.FC = () => {
               {product.images?.map((img, idx) => (
                 <img key={idx} src={img} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(img)} />
               ))}
-              {/* Fallback mock images if none exist */}
-              {!product.images && (
-                 <img src="https://picsum.photos/id/10/400/400" className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer" onMouseEnter={() => setActiveImage("https://picsum.photos/id/10/400/400")} />
+              
+              {/* Virtual Try-On Thumbnail Button */}
+              {canTryOn && (
+                <button 
+                  onClick={() => setShowAR(true)}
+                  className="w-10 h-10 border border-sky-200 bg-sky-50 hover:bg-sky-100 flex items-center justify-center text-sky-600 rounded cursor-pointer group"
+                  title="Try it on virtually"
+                >
+                  <Camera size={18} className="group-hover:scale-110 transition-transform" />
+                </button>
               )}
            </div>
            <div className="flex-1 relative">
              <ImageMagnifier src={activeImage} />
+             
+             {/* Main Try-On Overlay Action */}
+             {canTryOn && (
+               <button 
+                 onClick={() => setShowAR(true)}
+                 className="absolute bottom-4 left-4 right-4 bg-black/60 hover:bg-black/80 text-white backdrop-blur-md px-4 py-2 rounded-full flex items-center justify-center gap-2 text-xs font-bold transition-all shadow-lg z-10 border border-white/20"
+               >
+                 <Camera size={16} />
+                 VIRTUAL TRY-ON (LIVE MIRROR)
+               </button>
+             )}
            </div>
         </div>
 
