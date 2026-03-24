@@ -40,7 +40,7 @@ const Cart: React.FC = () => {
             {cart.map(item => (
               <div key={item.id} className="flex gap-4 border-b pb-4">
                 <Link to={`/product/${item.id}`}>
-                  <img src={item.image} alt={item.title} className="w-40 h-40 object-contain" />
+                  {item.image && <img src={item.image} alt={item.title} className="w-40 h-40 object-contain" />}
                 </Link>
                 <div className="flex-1">
                   <Link to={`/product/${item.id}`} className="text-lg font-medium text-storeweb-accent hover:underline line-clamp-2">

@@ -115,16 +115,16 @@ const Navbar: React.FC = () => {
             All
           </div>
           
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Best Sellers</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">New Releases</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">StoreWeb TV</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Today's Deals</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Customer Service</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Books</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Fashion</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Registry</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Gift Cards</span>
-          <span className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Sell</span>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Best Sellers</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">New Releases</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">StoreWeb TV</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Today's Deals</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Customer Service</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Books</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Fashion</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Registry</Link>
+          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Gift Cards</Link>
+          <Link to="/seller" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Sell</Link>
         </div>
       </nav>
 
@@ -141,71 +141,71 @@ const Navbar: React.FC = () => {
 
           {/* Sidebar Content */}
           <div className="relative w-[320px] bg-white h-full shadow-2xl overflow-y-auto flex flex-col animate-in slide-in-from-left duration-300">
-             <div className="bg-storeweb-dark text-white p-4 pl-8 font-bold text-lg flex items-center gap-3 sticky top-0 z-10">
+             <Link to={user ? "#" : "/auth"} onClick={() => !user && setIsSidebarOpen(false)} className="bg-storeweb-dark text-white p-4 pl-8 font-bold text-lg flex items-center gap-3 sticky top-0 z-10 hover:bg-slate-800">
                <UserIcon size={22} className="rounded-full bg-white text-storeweb-dark p-0.5" />
                Hello, {user ? user.name : 'Sign in'}
-             </div>
+             </Link>
              
              <div className="py-4 pb-20 text-gray-800 text-sm">
                 <div className="font-bold text-lg px-8 py-2 mt-2">Trending</div>
                 <ul>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer">Best Sellers</li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer">New Releases</li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer">Movers & Shakers</li>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">Best Sellers</Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">New Releases</Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">Movers & Shakers</Link>
                 </ul>
                 <hr className="my-2 border-gray-200"/>
 
                 <div className="font-bold text-lg px-8 py-2 mt-2">Digital Content & Devices</div>
                 <ul>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb TV <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb Music <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Mobiles, Computers <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Kindle E-readers & Books <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb Appstore <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
+                   </Link>
                 </ul>
                 <hr className="my-2 border-gray-200"/>
 
                 <div className="font-bold text-lg px-8 py-2 mt-2">Shop By Department</div>
                 <ul>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Electronics <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Computers <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Smart Home <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Arts & Crafts <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
+                   </Link>
                 </ul>
                 <hr className="my-2 border-gray-200"/>
 
                 <div className="font-bold text-lg px-8 py-2 mt-2">Programs & Features</div>
                 <ul>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Gift Cards <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Shop By Interest <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb Live <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
-                   <li className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </Link>
+                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       International Shopping <ChevronRight size={16} className="text-gray-400"/>
-                   </li>
+                   </Link>
                 </ul>
              </div>
           </div>

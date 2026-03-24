@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
@@ -42,25 +42,25 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
              <div className="grid grid-cols-4 gap-8 text-left text-gray-300 mb-8 px-4">
                <div>
                  <h3 className="font-bold text-white mb-2">Get to Know Us</h3>
-                 <p className="cursor-pointer hover:underline">Careers</p>
-                 <p className="cursor-pointer hover:underline">Blog</p>
-                 <p className="cursor-pointer hover:underline">About StoreWeb</p>
+                 <Link to="/" className="block cursor-pointer hover:underline">Careers</Link>
+                 <Link to="/" className="block cursor-pointer hover:underline">Blog</Link>
+                 <Link to="/" className="block cursor-pointer hover:underline">About StoreWeb</Link>
                </div>
                <div>
                  <h3 className="font-bold text-white mb-2">Make Money with Us</h3>
-                 <p className="cursor-pointer hover:underline">Sell products on StoreWeb</p>
-                 <p className="cursor-pointer hover:underline">Sell on StoreWeb Business</p>
+                 <Link to="/seller" className="block cursor-pointer hover:underline">Sell products on StoreWeb</Link>
+                 <Link to="/seller" className="block cursor-pointer hover:underline">Sell on StoreWeb Business</Link>
                </div>
                <div>
                  <h3 className="font-bold text-white mb-2">StoreWeb Payment</h3>
-                 <p className="cursor-pointer hover:underline">StoreWeb Business Card</p>
-                 <p className="cursor-pointer hover:underline">Shop with Points</p>
+                 <Link to="/" className="block cursor-pointer hover:underline">StoreWeb Business Card</Link>
+                 <Link to="/" className="block cursor-pointer hover:underline">Shop with Points</Link>
                </div>
                <div>
                  <h3 className="font-bold text-white mb-2">Let Us Help You</h3>
-                 <p className="cursor-pointer hover:underline">StoreWeb and COVID-19</p>
-                 <p className="cursor-pointer hover:underline">Your Account</p>
-                 <p className="cursor-pointer hover:underline">Your Orders</p>
+                 <Link to="/" className="block cursor-pointer hover:underline">StoreWeb and COVID-19</Link>
+                 <Link to="/auth" className="block cursor-pointer hover:underline">Your Account</Link>
+                 <Link to="/orders" className="block cursor-pointer hover:underline">Your Orders</Link>
                </div>
              </div>
              <div className="border-t border-gray-600 pt-4 mx-4">

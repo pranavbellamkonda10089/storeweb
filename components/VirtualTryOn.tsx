@@ -225,7 +225,7 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
         />
 
         {/* AI Tracked AR Layer */}
-        {isReady && !isLoadingModel && (
+        {isReady && !isLoadingModel && productImage && (
           <img 
             src={productImage} 
             style={getProductStyle()}

@@ -69,7 +69,7 @@ const OrderTracking: React.FC = () => {
                  <div className="space-y-4">
                    {order.items.map(item => (
                      <div key={item.id} className="flex gap-4">
-                        <img src={item.image} className="w-20 h-20 object-contain" />
+                        {item.image && <img src={item.image} className="w-20 h-20 object-contain" alt={item.title} />}
                         <div>
                            <div className="font-bold text-storeweb-accent hover:underline text-sm">{item.title}</div>
                            <div className="text-xs text-gray-500">Return window closed on Nov 20, 2023</div>

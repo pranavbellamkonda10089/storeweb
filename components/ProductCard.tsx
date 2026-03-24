@@ -29,11 +29,13 @@ const ProductCard: React.FC<Props> = ({ product }) => {
       <Link to={`/product/${product.id}`} className="flex-1 flex justify-center items-center bg-gray-50 mb-4 p-4 h-48 relative">
         
         {/* Main Image */}
-        <img 
-          src={allImages[currentImageIndex]} 
-          alt={product.title} 
-          className="max-h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" 
-        />
+        {allImages[currentImageIndex] && (
+          <img 
+            src={allImages[currentImageIndex]} 
+            alt={product.title} 
+            className="max-h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" 
+          />
+        )}
 
         {/* Carousel Buttons - Only show if multiple images */}
         {allImages.length > 1 && (

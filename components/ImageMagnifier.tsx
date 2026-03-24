@@ -25,11 +25,13 @@ const ImageMagnifier: React.FC<ImageMagnifierProps> = ({ src }) => {
       onMouseLeave={() => setShowMagnifier(false)}
       onMouseMove={handleMouseMove}
     >
-      <img 
-        src={src} 
-        className="w-full max-h-[500px] object-contain cursor-crosshair block" 
-        alt="Product Main"
-      />
+      {src && (
+        <img 
+          src={src} 
+          className="w-full max-h-[500px] object-contain cursor-crosshair block" 
+          alt="Product Main"
+        />
+      )}
       
       {showMagnifier && (
         <div 

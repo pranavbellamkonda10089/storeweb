@@ -92,7 +92,7 @@ const Checkout: React.FC = () => {
             <div className="border rounded p-4">
               {cart.map(item => (
                 <div key={item.id} className="flex gap-4 mb-4">
-                   <img src={item.image} className="w-16 h-16 object-contain" />
+                   {item.image && <img src={item.image} className="w-16 h-16 object-contain" alt={item.title} />}
                    <div>
                       <div className="font-bold text-sm">{item.title}</div>
                       <div className="text-sm text-red-700 font-bold">₹{item.price.toFixed(2)}</div>

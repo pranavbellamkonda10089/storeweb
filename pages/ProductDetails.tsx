@@ -80,9 +80,9 @@ const ProductDetails: React.FC = () => {
         {/* Images */}
         <div className="md:col-span-4 lg:col-span-5 flex gap-4 sticky top-24 self-start z-30">
            <div className="flex flex-col gap-2">
-              <img src={product.image} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(product.image)} />
+              {product.image && <img src={product.image} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(product.image)} alt="thumbnail" />}
               {product.images?.map((img, idx) => (
-                <img key={idx} src={img} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(img)} />
+                img && <img key={idx} src={img} className="w-10 h-10 border hover:border-storeweb-primary cursor-pointer object-contain" onMouseEnter={() => setActiveImage(img)} alt={`thumbnail-${idx}`} />
               ))}
               
               {/* Virtual Try-On Thumbnail Button */}
@@ -247,7 +247,7 @@ const ProductDetails: React.FC = () => {
                  {/* Media */}
                  <div className="flex gap-2">
                    {review.images?.map((img, i) => (
-                     <img key={i} src={img} className="w-20 h-20 object-cover border rounded cursor-pointer" />
+                     img && <img key={i} src={img} className="w-20 h-20 object-cover border rounded cursor-pointer" alt={`review-${i}`} />
                    ))}
                    {review.video && (
                       <div className="relative w-32 h-20 bg-black rounded overflow-hidden group cursor-pointer">
