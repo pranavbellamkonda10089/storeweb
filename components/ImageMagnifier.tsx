@@ -8,6 +8,8 @@ const ImageMagnifier: React.FC<ImageMagnifierProps> = ({ src }) => {
   const [showMagnifier, setShowMagnifier] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
+  if (!src) return null;
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
     

@@ -1,20 +1,12 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Camera, X, RotateCcw, Scan, ShieldCheck, BoxSelect, Maximize2, UserCheck, AlertCircle, Loader2, RefreshCw } from 'lucide-react';
+import { FaceLandmarker, FilesetResolver } from '@mediapipe/tasks-vision';
 
 interface Props {
   productImage: string;
   category: string;
   onClose: () => void;
-}
-
-// Global declarations to handle various MediaPipe CDN exports
-declare global {
-  interface Window {
-    vision?: any;
-    FaceLandmarker?: any;
-    FilesetResolver?: any;
-  }
 }
 
 const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
@@ -35,6 +27,9 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
   const isEyewear = category.toLowerCase().includes('eyewear') || 
                     category.toLowerCase().includes('glasses') || 
                     category.toLowerCase().includes('goggles');
+                    
+  const isWatch = category.toLowerCase().includes('watch') || 
+                  category.toLowerCase().includes('wrist');
 
   const stopCamera = () => {
     if (stream) {
@@ -74,46 +69,22 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
   }, []);
 
   useEffect(() => {
-    let faceLandmarker: any;
+    let landmarker: FaceLandmarker;
     let animationFrameId: number;
     let lastVideoTime = -1;
 
     const setupTracking = async () => {
-      // Helper to detect whichever global MediaPipe used
-      const getMediaPipeLibrary = () => {
-        if (window.vision) return window.vision;
-        if (window.FaceLandmarker && window.FilesetResolver) {
-          return { 
-            FaceLandmarker: window.FaceLandmarker, 
-            FilesetResolver: window.FilesetResolver 
-          };
-        }
-        return null;
-      };
-
-      // Poll for library availability
-      let lib = getMediaPipeLibrary();
-      let retries = 0;
-      while (!lib && retries < 40) {
-        await new Promise(r => setTimeout(r, 250));
-        lib = getMediaPipeLibrary();
-        retries++;
-      }
-
-      if (!lib) {
-        setError("Face tracking library (MediaPipe) could not be loaded. This is often due to a browser security setting or CDN disruption.");
+      if (isWatch) {
+        setIsLoadingModel(false);
         return;
       }
 
       try {
-        const { FilesetResolver, FaceLandmarker } = lib;
-
-        // Use version-specific WASM path for consistency
         const filesetResolver = await FilesetResolver.forVisionTasks(
           "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
         );
         
-        faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+        landmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
           baseOptions: {
             modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
             delegate: "GPU"
@@ -132,13 +103,13 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
     };
 
     const predict = () => {
-      if (!videoRef.current || !faceLandmarker) return;
+      if (!videoRef.current || !landmarker) return;
 
       const startTimeMs = performance.now();
-      if (lastVideoTime !== videoRef.current.currentTime) {
+      if (videoRef.current.readyState >= 2 && lastVideoTime !== videoRef.current.currentTime) {
         lastVideoTime = videoRef.current.currentTime;
         try {
-          const results = faceLandmarker.detectForVideo(videoRef.current, startTimeMs);
+          const results = landmarker.detectForVideo(videoRef.current, startTimeMs);
 
           if (results.faceLandmarks && results.faceLandmarks.length > 0) {
             const landmarks = results.faceLandmarks[0];
@@ -182,11 +153,27 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
 
     return () => {
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
-      if (faceLandmarker) faceLandmarker.close();
+      if (landmarker) landmarker.close();
     };
-  }, [isReady]);
+  }, [isReady, isWatch]);
 
   const getProductStyle = (): React.CSSProperties => {
+    if (isWatch) {
+      const baseWidth = 45; 
+      const width = baseWidth * manualScale;
+      return {
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        width: `${width}%`,
+        transform: 'translate(-50%, -50%)',
+        pointerEvents: 'none',
+        zIndex: 50,
+        filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.5))',
+        opacity: 1
+      };
+    }
+
     if (!faceTransform.visible || !videoRef.current) {
       return { opacity: 0, transition: 'opacity 0.2s' };
     }
@@ -224,6 +211,19 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
           className="w-full h-full object-cover scale-x-[-1]"
         />
 
+        {/* Wrist Guide for Watches */}
+        {isWatch && isReady && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-40">
+             <div className="w-[60%] h-[25%] border-2 border-dashed border-sky-400/50 rounded-[3rem] animate-pulse relative">
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-sky-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full whitespace-nowrap">
+                   Center Wrist for Try-On
+                </div>
+                <div className="absolute top-0 bottom-0 left-10 w-0.5 bg-sky-400/20" />
+                <div className="absolute top-0 bottom-0 right-10 w-0.5 bg-sky-400/20" />
+             </div>
+          </div>
+        )}
+
         {/* AI Tracked AR Layer */}
         {isReady && !isLoadingModel && productImage && (
           <img 
@@ -235,7 +235,7 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
         )}
 
         {/* Loader/Calibration UX */}
-        {(isLoadingModel || !faceTransform.visible) && !error && (
+        {(isLoadingModel || (!isWatch && !faceTransform.visible)) && !error && (
           <div className="absolute inset-0 bg-black/60 backdrop-blur-md flex flex-col items-center justify-center text-white z-50 text-center px-10">
              {isLoadingModel ? (
                <>
@@ -262,9 +262,9 @@ const VirtualTryOn: React.FC<Props> = ({ productImage, category, onClose }) => {
               <div>
                  <h2 className="text-white font-black text-lg tracking-tight uppercase leading-none mb-1">Mirror AI Pro</h2>
                  <div className="flex items-center gap-2">
-                    <div className={`w-2.5 h-2.5 rounded-full ${faceTransform.visible ? 'bg-green-500 shadow-[0_0_12px_#22c55e]' : 'bg-rose-500 animate-pulse'}`} />
+                    <div className={`w-2.5 h-2.5 rounded-full ${(isWatch || faceTransform.visible) ? 'bg-green-500 shadow-[0_0_12px_#22c55e]' : 'bg-rose-500 animate-pulse'}`} />
                     <span className="text-sky-300 text-[10px] font-black tracking-widest uppercase">
-                      {faceTransform.visible ? 'Bio-Mesh Locked' : 'Searching Engine'}
+                      {isWatch ? 'Position Tracker Ready' : (faceTransform.visible ? 'Bio-Mesh Locked' : 'Searching Engine')}
                     </span>
                  </div>
               </div>

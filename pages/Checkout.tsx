@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
-import { Lock } from 'lucide-react';
+import { Lock, CheckCircle, CreditCard } from 'lucide-react';
 
 const Checkout: React.FC = () => {
   const { cart, placeOrder, user } = useStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [orderComplete, setOrderComplete] = useState(false);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/auth?redirect=checkout');
+    }
+  }, [user, navigate]);
   
   const subtotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const tax = subtotal * 0.08;
@@ -21,12 +28,50 @@ const Checkout: React.FC = () => {
     country: 'United States'
   });
 
+  const [payment, setPayment] = useState({
+    cardNumber: '',
+    expiry: '',
+    cvv: ''
+  });
+
   const handlePlaceOrder = async () => {
+    if (!address.street || !address.city || !address.zip) {
+      alert("Please fill in your shipping address");
+      return;
+    }
+    if (payment.cardNumber.length < 16 || !payment.expiry || payment.cvv.length < 3) {
+      alert("Please enter valid payment details");
+      return;
+    }
     setLoading(true);
+    // Simulate payment authorization
+    await new Promise(resolve => setTimeout(resolve, 2000));
     await placeOrder(address);
     setLoading(false);
-    navigate('/orders');
+    setOrderComplete(true);
+    
+    // Final delay to show success state
+    setTimeout(() => {
+      navigate('/orders');
+    }, 2000);
   };
+
+  if (orderComplete) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+        <div className="text-center animate-in zoom-in duration-500">
+           <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle size={48} />
+           </div>
+           <h1 className="text-3xl font-bold text-gray-900 mb-2">Payment Successful!</h1>
+           <p className="text-gray-600 mb-8">Your order has been placed and is being processed.</p>
+           <div className="flex items-center justify-center gap-2 text-storeweb-accent animate-pulse">
+              <span>Redirecting to your orders...</span>
+           </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -68,19 +113,56 @@ const Checkout: React.FC = () => {
             </div>
           </div>
 
-          {/* Payment Section (Dummy) */}
+          {/* Payment Section */}
           <div className="bg-white border-b pb-4">
             <h2 className="text-lg font-bold text-storeweb-primary mb-4">2 Payment method</h2>
             <div className="border rounded-md p-4 bg-gray-50">
-               <div className="flex items-center gap-2 mb-2">
+               <div className="flex items-center gap-2 mb-4">
                   <input type="radio" checked readOnly className="text-sky-600" />
-                  <span className="font-bold">Credit or Debit Card</span>
+                  <span className="font-bold flex items-center gap-2">
+                    <CreditCard size={18} />
+                    Credit or Debit Card
+                  </span>
                </div>
-               <div className="ml-6 space-y-2 max-w-xs">
-                  <input type="text" placeholder="Card number (Dummy)" className="w-full border rounded p-1.5" disabled />
-                  <div className="flex gap-2">
-                     <input type="text" placeholder="MM/YY" className="w-1/2 border rounded p-1.5" disabled/>
-                     <input type="text" placeholder="CVC" className="w-1/2 border rounded p-1.5" disabled/>
+               <div className="ml-6 space-y-3 max-w-sm">
+                  <div className="space-y-1">
+                    <label className="text-xs font-bold text-gray-600">Card number</label>
+                    <input 
+                      type="text" 
+                      maxLength={16}
+                      placeholder="0000 0000 0000 0000" 
+                      className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none font-mono" 
+                      value={payment.cardNumber}
+                      onChange={e => setPayment({...payment, cardNumber: e.target.value.replace(/\D/g, '')})}
+                    />
+                  </div>
+                  <div className="flex gap-4">
+                     <div className="flex-1 space-y-1">
+                        <label className="text-xs font-bold text-gray-600">Expiration (MM/YY)</label>
+                        <input 
+                          type="text" 
+                          maxLength={5}
+                          placeholder="MM/YY" 
+                          className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none" 
+                          value={payment.expiry}
+                          onChange={e => {
+                            let val = e.target.value.replace(/\D/g, '');
+                            if (val.length > 2) val = val.substring(0, 2) + '/' + val.substring(2);
+                            setPayment({...payment, expiry: val});
+                          }}
+                        />
+                     </div>
+                     <div className="w-1/3 space-y-1">
+                        <label className="text-xs font-bold text-gray-600">CVV</label>
+                        <input 
+                          type="password" 
+                          maxLength={3}
+                          placeholder="000" 
+                          className="w-full border rounded p-1.5 focus:ring-1 ring-sky-500 outline-none" 
+                          value={payment.cvv}
+                          onChange={e => setPayment({...payment, cvv: e.target.value.replace(/\D/g, '')})}
+                        />
+                     </div>
                   </div>
                </div>
             </div>
@@ -113,7 +195,12 @@ const Checkout: React.FC = () => {
                 disabled={loading}
                 className="w-full bg-storeweb-primary hover:bg-storeweb-hover text-white rounded-md py-2 text-sm shadow-sm mb-4 disabled:opacity-50 transition-colors"
              >
-               {loading ? 'Processing...' : 'Place your order'}
+               {loading ? (
+                 <div className="flex items-center justify-center gap-2 leading-none">
+                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                   <span>Securing Payment...</span>
+                 </div>
+               ) : 'Place your order'}
              </button>
              <p className="text-xs text-center text-gray-500 mb-4 px-2">
                By placing your order, you agree to StoreWeb Clone's fake privacy notice and conditions of use.

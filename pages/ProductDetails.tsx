@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
 import { Star, Truck, ShieldCheck, MapPin, Video, Image as ImageIcon, Send, Camera } from 'lucide-react';
 import { Review, OrderStatus } from '../types';
@@ -10,11 +10,13 @@ import VirtualTryOn from '../components/VirtualTryOn';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { products, addToCart, reviews, user, addReview } = useStore();
   const [activeImage, setActiveImage] = useState<string>('');
   const [aiResponse, setAiResponse] = useState<string>('');
   const [userQuery, setUserQuery] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isSummarizing, setIsSummarizing] = useState(false);
   const [summary, setSummary] = useState<string | null>(null);
   const [showAR, setShowAR] = useState(false);
 
@@ -41,11 +43,12 @@ const ProductDetails: React.FC = () => {
   };
 
   const handleReviewSummary = async () => {
-    setIsTyping(true);
+    if (productReviews.length === 0) return alert("No reviews to summarize");
+    setIsSummarizing(true);
     const reviewTexts = productReviews.map(r => r.text);
     const sum = await summarizeReviews(reviewTexts);
     setSummary(sum);
-    setIsTyping(false);
+    setIsSummarizing(false);
   };
 
   const submitReview = () => {
@@ -60,6 +63,11 @@ const ProductDetails: React.FC = () => {
     };
     addReview(product.id, newReview);
     setReviewForm({ rating: 5, title: '', text: '' });
+  };
+
+  const handleBuyNow = () => {
+    addToCart(product, 1);
+    navigate('/checkout');
   };
 
   const canTryOn = product.category.toLowerCase().includes('watch') || 
@@ -119,7 +127,7 @@ const ProductDetails: React.FC = () => {
               <div className="flex text-yellow-400">
                 {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
               </div>
-              <span className="text-storeweb-accent text-sm hover:underline">{product.reviewCount} ratings</span>
+              <span className="text-storeweb-accent text-sm hover:underline cursor-pointer" onClick={() => navigate('/coming-soon')}>{product.reviewCount} ratings</span>
            </div>
            <div className="border-t border-b border-gray-200 py-4 my-4">
               <div className="flex items-start gap-1">
@@ -175,9 +183,12 @@ const ProductDetails: React.FC = () => {
              >
                Add to Cart
              </button>
-             <button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-2 text-sm mb-4 shadow-sm transition-colors font-medium">
-               Buy Now
-             </button>
+              <button 
+                onClick={handleBuyNow}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-2 text-sm mb-4 shadow-sm transition-colors font-medium"
+              >
+                Buy Now
+              </button>
              
              <div className="text-xs text-gray-500 grid grid-cols-2 gap-y-1">
                 <span>Ships from</span> <span>StoreWeb</span>
@@ -204,15 +215,32 @@ const ProductDetails: React.FC = () => {
              </div>
              <button 
                onClick={handleReviewSummary}
-               className="text-sm border border-gray-300 shadow-sm rounded-md px-4 py-2 hover:bg-gray-50 w-full mb-4 text-left flex justify-between items-center"
+               disabled={isSummarizing}
+               className="text-sm border border-gray-300 shadow-sm rounded-md px-4 py-2 hover:bg-gray-50 w-full mb-4 text-left flex justify-between items-center disabled:opacity-50 transition-all font-medium"
              >
-               <span>Summarize reviews with AI</span>
-               <span className="text-xs bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-1 rounded">Beta</span>
+               <div className="flex items-center gap-2">
+                 {isSummarizing ? (
+                   <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                 ) : (
+                   <span className="bg-storeweb-dark text-white text-[10px] px-1 rounded">AI</span>
+                 )}
+                 <span>{isSummarizing ? 'Summarizing...' : 'Summarize reviews with AI'}</span>
+               </div>
+               {!isSummarizing && <span className="text-xs bg-gradient-to-r from-sky-500 to-indigo-500 text-white px-1 rounded">Beta</span>}
              </button>
              {summary && (
-               <div className="bg-gray-50 p-3 rounded text-sm text-gray-800 mb-4 border border-gray-200">
-                 <h4 className="font-bold mb-1">AI Summary:</h4>
-                 <div className="whitespace-pre-wrap">{summary}</div>
+               <div className="bg-indigo-50 p-4 rounded-lg text-sm text-gray-800 mb-6 border border-indigo-100 shadow-inner animate-in fade-in zoom-in-95 duration-300">
+                 <div className="flex items-center gap-2 mb-2 text-indigo-700">
+                   <div className="bg-indigo-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">AI INSIGHT</div>
+                   <h4 className="font-bold">Pros & Cons Summary</h4>
+                 </div>
+                 <div className="whitespace-pre-wrap leading-relaxed">{summary}</div>
+                 <button 
+                   onClick={() => setSummary(null)}
+                   className="mt-4 text-xs text-indigo-600 hover:underline font-medium"
+                 >
+                   Dismiss summary
+                 </button>
                </div>
              )}
 

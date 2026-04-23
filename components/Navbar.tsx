@@ -115,15 +115,15 @@ const Navbar: React.FC = () => {
             All
           </div>
           
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Best Sellers</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">New Releases</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">StoreWeb TV</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Today's Deals</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Customer Service</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Books</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Fashion</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Registry</Link>
-          <Link to="/" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Gift Cards</Link>
+          <button onClick={() => { setSearchQuery("Best Sellers"); navigate("/"); }} className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors border-none bg-transparent text-gray-100 text-sm">Best Sellers</button>
+          <button onClick={() => { setSearchQuery("New Releases"); navigate("/"); }} className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors border-none bg-transparent text-gray-100 text-sm">New Releases</button>
+          <Link to="/coming-soon" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">StoreWeb TV</Link>
+          <button onClick={() => { setSearchQuery("Deals"); navigate("/"); }} className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors border-none bg-transparent text-gray-100 text-sm">Today's Deals</button>
+          <Link to="/coming-soon" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Customer Service</Link>
+          <button onClick={() => { setSearchQuery("Electronics"); navigate("/"); }} className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors border-none bg-transparent text-gray-100 text-sm">Electronics</button>
+          <button onClick={() => { setSearchQuery("Clothing"); navigate("/"); }} className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors border-none bg-transparent text-gray-100 text-sm">Fashion</button>
+          <Link to="/coming-soon" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Registry</Link>
+          <Link to="/coming-soon" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Gift Cards</Link>
           <Link to="/seller" className="cursor-pointer hover:text-white hover:bg-white/10 p-1 rounded transition-colors">Sell</Link>
         </div>
       </nav>
@@ -149,27 +149,27 @@ const Navbar: React.FC = () => {
              <div className="py-4 pb-20 text-gray-800 text-sm">
                 <div className="font-bold text-lg px-8 py-2 mt-2">Trending</div>
                 <ul>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">Best Sellers</Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">New Releases</Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">Movers & Shakers</Link>
+                   <div onClick={() => { setSearchQuery("Best Sellers"); navigate("/"); setIsSidebarOpen(false); }} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">Best Sellers</div>
+                   <div onClick={() => { setSearchQuery("New Releases"); navigate("/"); setIsSidebarOpen(false); }} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">New Releases</div>
+                   <div onClick={() => { setSearchQuery("Movers & Shakers"); navigate("/"); setIsSidebarOpen(false); }} className="block px-8 py-3 hover:bg-gray-100 cursor-pointer">Movers & Shakers</div>
                 </ul>
                 <hr className="my-2 border-gray-200"/>
 
                 <div className="font-bold text-lg px-8 py-2 mt-2">Digital Content & Devices</div>
                 <ul>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb TV <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb Music <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <div onClick={() => { setSearchQuery("Mobiles"); navigate("/"); setIsSidebarOpen(false); }} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Mobiles, Computers <ChevronRight size={16} className="text-gray-400"/>
-                   </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </div>
+                   <div onClick={() => { setSearchQuery("Kindle"); navigate("/"); setIsSidebarOpen(false); }} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Kindle E-readers & Books <ChevronRight size={16} className="text-gray-400"/>
-                   </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </div>
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb Appstore <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
                 </ul>
@@ -177,33 +177,33 @@ const Navbar: React.FC = () => {
 
                 <div className="font-bold text-lg px-8 py-2 mt-2">Shop By Department</div>
                 <ul>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <div onClick={() => { setSearchQuery("Electronics"); navigate("/"); setIsSidebarOpen(false); }} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Electronics <ChevronRight size={16} className="text-gray-400"/>
-                   </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </div>
+                   <div onClick={() => { setSearchQuery("Computers"); navigate("/"); setIsSidebarOpen(false); }} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Computers <ChevronRight size={16} className="text-gray-400"/>
-                   </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </div>
+                   <div onClick={() => { setSearchQuery("Smart Home"); navigate("/"); setIsSidebarOpen(false); }} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Smart Home <ChevronRight size={16} className="text-gray-400"/>
-                   </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   </div>
+                   <div onClick={() => { setSearchQuery("Arts & Crafts"); navigate("/"); setIsSidebarOpen(false); }} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Arts & Crafts <ChevronRight size={16} className="text-gray-400"/>
-                   </Link>
+                   </div>
                 </ul>
                 <hr className="my-2 border-gray-200"/>
 
                 <div className="font-bold text-lg px-8 py-2 mt-2">Programs & Features</div>
                 <ul>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Gift Cards <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       Shop By Interest <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       StoreWeb Live <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
-                   <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
+                   <Link to="/coming-soon" onClick={() => setIsSidebarOpen(false)} className="px-8 py-3 hover:bg-gray-100 cursor-pointer flex justify-between items-center group">
                       International Shopping <ChevronRight size={16} className="text-gray-400"/>
                    </Link>
                 </ul>
